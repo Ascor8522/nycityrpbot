@@ -7,7 +7,9 @@ const backup = require('./js/backup.js');
 const loadData = require('./js/loadData.js');
 const getToken = require('./js/getToken.js');
 
-BOT.login(getToken.getToken());
+console.log(getToken.getToken());
+
+//BOT.login();
 
 BOT.on('ready', () => {
     console.log('Bot prêt!');
@@ -26,4 +28,4 @@ BOT.on('message', message => {
     return;
 });
 
-backup.backup(data);
+//backup.backup(data);
