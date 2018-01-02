@@ -6,6 +6,7 @@ const FS = require('fs');
 const backup = require('./js/backup.js');
 const loadData = require('./js/loadData.js');
 const getToken = require('./js/getToken.js');
+const analyerMessage = require('./js/analyserMessage.js');
 
 console.log(getToken.getToken());
 
