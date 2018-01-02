@@ -1,5 +1,5 @@
 {
     "joueurs":[
-        {"id":"", "metier":"", "banque":"", "inventaire":""}
+        {"id":"", "metier":"", "banque":"", "inventaire":"", "dateSalaireRecu":""}
     ]
 }
