@@ -6,10 +6,11 @@ const FS = require('fs');
 const backup = require('./js/backup.js');
 const loadData = require('./js/loadData.js');
 const getToken = require('./js/getToken.js');
-const analyerMessage = require('./js/analyserMessage.js');
+const analyserMessage = require('./js/analyserMessage.js');
 
-console.log(getToken.getToken());
+//console.log(getToken.getToken());
 
+BOT.login('Mzk3NDkwMzQ1NTg1Mjc4OTc3.DS0FZQ.LTy61WKDV_vsAJLYK_0NRP0NTZc');
 //BOT.login();
 
 BOT.on('ready', () => {
@@ -22,11 +23,16 @@ BOT.on('ready', () => {
 var data;
 
 BOT.on('message', message => {
-    let reponse = analyerMessage(message);
-    if (reponse) {
-        message.channel.reponse(reponse);
+    if (message.author.id!="397490345585278977") {
+        if(message.channel.id=="397785283548151808") {
+
+            let reponse = analyserMessage.analyserMessage(message);
+            if (reponse) {
+                message.reply(reponse);
+            }
+            return;
+        }
     }
-    return;
 });
 
 //backup.backup(data);
