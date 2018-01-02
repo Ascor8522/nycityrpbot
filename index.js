@@ -1,26 +1,22 @@
-import { Client } from 'discord.js';
-
 const DISCORD = require('discord.js');
 const BOT = new DISCORD.Client();
 
 const FS = require('fs');
 
+const backup = require('./js/backup.js');
+const loadData = require('./js/loadData.js');
+const getToken = require('./js/getToken.js');
 
-FS.readFile('token', 'utf8', function (err, data) {
-    if (err) {
-        return console.error(err);
-    } else {
-        //BOT.login(data);
-        console.log(data);
-    }
-    
-});
+BOT.login(getToken.getToken());
 
 BOT.on('ready', () => {
-    console.log('Bot pret!');
-    console.log('Connecte en tant que '+ BOT.user.tag);
+    console.log('Bot prêt!');
+    console.log('Connecté en tant que '+ BOT.user.tag);
+    data =  loadData.loadData();
+    console.log('Données réceptionnées.');
 });
 
+var data;
 
 BOT.on('message', message => {
     let reponse = analyerMessage(message);
@@ -30,6 +26,4 @@ BOT.on('message', message => {
     return;
 });
 
-function analyerMessage() {
-
-}
+backup.backup(data);
