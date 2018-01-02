@@ -8,16 +8,20 @@ const loadData = require('./js/loadData.js');
 const getToken = require('./js/getToken.js');
 const analyserMessage = require('./js/analyserMessage.js');
 
-//console.log(getToken.getToken());
-
-BOT.login('Mzk3NDkwMzQ1NTg1Mjc4OTc3.DS0FZQ.LTy61WKDV_vsAJLYK_0NRP0NTZc');
-//BOT.login();
+getToken.getToken(function(err, result){
+    if(err) {
+        return console.log(err);
+    } else {
+        BOT.login(result);
+        console.log('[BOT] Le bot a démarré');
+    }
+  });
 
 BOT.on('ready', () => {
-    console.log('Bot prêt!');
-    console.log('Connecté en tant que '+ BOT.user.tag);
+    console.log('[BOT] Bot prêt!');
+    console.log('[BOT] Connecté en tant que '+ BOT.user.tag);
     data =  loadData.loadData();
-    console.log('Données réceptionnées.');
+    console.log('[DATA] Données réceptionnées.');
 });
 
 var data;
