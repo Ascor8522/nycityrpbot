@@ -92,7 +92,11 @@ module.exports = {
                             } else { toReturn = renvoyer([0,5,14], toReturn); }
                             break;
                         case 'postuler':
-                            
+                            if (entree.length<4) {
+                                if(metiers.includes(entree[2])) {
+                                    // AJOUTER METIER
+                                } else { toReturn = renvoyer([0,5,14], toReturn); }
+                            } else { toReturn = renvoyer([0,5,16], toReturn); }
                             break;
                         case 'quitter':
                             if (entree.length<3) {
