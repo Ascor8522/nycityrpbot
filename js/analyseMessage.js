@@ -42,13 +42,20 @@ module.exports = {
                         case 'compte':
                             switch (entree[2]) {
                                 case 'ouvrir':
+                                case 'créer':
+                                case 'creer':
+                                case 'nouveau':
                                     if (entree.length<4) {
                                         //OUVRIR UN COMPTE
+                                        toReturn = 'Cette fonction sera ajoutée prochainement';
                                     } else { toReturn = renvoyer([0,3,7],toReturn); }
                                     break;
                                 case 'cloturer':
+                                case 'fermer':
+                                case 'suprimmer':
                                     if (entree.length<4) {
                                         //CLOTURER UN COMPTE
+                                        toReturn = 'Cette fonction sera ajoutée prochainement';
                                     } else { toReturn = renvoyer([0,3,8],toReturn); }
                                     break;
                                 default:
@@ -57,11 +64,13 @@ module.exports = {
                             }
                             break;
                         case 'déposer':
+                        case 'ajouter':
                             if (entree.length<4) {
                                 // DEPOSER
                             } else { toReturn = renvoyer([0,3,9], toReturn); }
                             break;
                         case 'retrait':
+                        case 'retirer':
                             if (entree.length<4) {
                                 // RETRAIT
                             } else { toReturn = renvoyer([0,3,10], toReturn); }
@@ -73,7 +82,23 @@ module.exports = {
                 case '$métier': //métier
                 case '$metier':
                 case '$job':
-                    toReturn = renvoyer([5], toReturn);
+                    switch (entree[1]) {
+                        case 'help':
+                            toReturn = renvoyer([14,15,16], toReturn);
+                            break;
+                        case 'liste':
+                            if (entree.length<3) {
+
+                            } else { toReturn = renvoyer([0,5,14], toReturn); }
+                            break;
+                        case 'postuler':
+                            break;
+                        case 'quitter':
+                            break;
+                        default:
+                        toReturn = renvoyer([0,5], toReturn);
+                            break;
+                    }
                     break;
                 case '$jouer':
                     newPlayer.newPlayer(message);
