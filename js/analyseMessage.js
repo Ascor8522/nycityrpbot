@@ -31,17 +31,20 @@ module.exports = {
         if (entree[0].charAt(0)=="$") {
             switch (entree[0]) {
                 case '$help':   //aide
-                    toReturn = "\n" ;
-                    for( var i=1;i<6;i++) {
+                    for(var i=1;i<6;i++) {
                         toReturn = toReturn + commandes[i] + "\n";
                     }
                     break;
                 case '$banque': //banque
                     switch (entree[1]) {
                         case 'help':
-                            toReturn = commandes[];
+                            for(var i=7;i<12;i++) {
+                                toReturn = toReturn + commandes[i] + "\n";
+                            }
                         case 'déposer':
-                            break;   
+                            break;
+                        default:
+                            toReturn = commandes[0] + "\n" + commandes[3];
                     }
                     break;
                 case '$métier': //métier
@@ -58,6 +61,7 @@ module.exports = {
                     toReturn = commandes[0];
             }
         }
+        toReturn = "\n" + toReturn
         return toReturn;
     }
 }
