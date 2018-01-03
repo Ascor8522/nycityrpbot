@@ -1,7 +1,7 @@
 const FS = require('fs');
 
 module.exports = {
-    getToken: function (callback){
+    getToken: function (callback) {
         FS.readFile('./token', 'utf8', function (err, data) {
             if (err) {
                 console.error('[ERREUR TOKEN] Le token n\' a pas pu être récupéré.');

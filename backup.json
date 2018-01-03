@@ -1,5 +1,8 @@
 {
     "joueurs":[
-        {"id":"", "metier":"", "salaireMetier":"", "dateARecuSalaire":"", "banque":"", "inventaire":""}
+        {"id":"274241336490852353", "metier":"", "salaireMetier":"", "dateARecuSalaire":"", "banque":"", "inventaire":""},
+        {"id":"345196770273394708", "metier":"", "salaireMetier":"", "dateARecuSalaire":"", "banque":"", "inventaire":""},
+        {"id":"358967614388830219", "metier":"", "salaireMetier":"", "dateARecuSalaire":"", "banque":"", "inventaire":""},
+        {"id":"276060004262477825", "metier":"", "salaireMetier":"", "dateARecuSalaire":"", "banque":"", "inventaire":""}
     ]
 }
