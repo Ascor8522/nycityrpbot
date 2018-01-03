@@ -24,9 +24,10 @@ module.exports = {
             "\t**$métier postuler <métier>** \t Vous affecte un nouveau métier.",
             "\t**$métier quitter** \t Vous quittez votre métier et vous retrouvez sans emploi.",
             "\t**$inventaire ouvrir** \t Ouvre votre inventaire et vous montre son contenu.",
-            "\t**$inventaire jeter <objet|numéro> Vous vous débarassez de l'bjet en question."
-
+            "\t**$inventaire jeter <objet|numéro> Vous vous débarassez de l'bjet en question.",
+            "\t**$payer <joueur|id> <montant>** \t Paye la somme spécifiée au joueur désigné."
         ];
+
         if (entree[0].charAt(0)=="$") {
             switch (entree[0]) {
                 case '$help':   //aide
