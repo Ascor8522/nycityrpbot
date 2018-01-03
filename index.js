@@ -1,12 +1,18 @@
-const DISCORD = require('discord.js');
+const DISCORD = require('discord.js').catch(error => {
+    console.log('[DISCORD.JS]' + error)});
 const BOT = new DISCORD.Client();
 
-const FS = require('fs');
+const FS = require('fs').catch(error => {
+    console.log('[FS]' + error)});
 
-const backup = require('./js/backup.js');
-const loadData = require('./js/loadData.js');
-const getToken = require('./js/getToken.js');
-const analyseMessage = require('./js/analyseMessage.js');
+const backup = require('./js/backup.js').catch(error => {
+    console.log('[BACKUP.JS]' + error)});
+const loadData = require('./js/loadData.js').catch(error => {
+    console.log('[LOADDATA.JS]' + error)});
+const getToken = require('./js/getToken.js').catch(error => {
+    console.log('[GETTOKEN.JS]' + error)});
+const analyseMessage = require('./js/analyseMessage.js').catch(error => {
+    console.log('[ANALYSEMESSAGE.JS]' + error)});
 
 var data;
 

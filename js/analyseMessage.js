@@ -112,6 +112,7 @@ module.exports = {
                     newPlayer.newPlayer(message);
                     break;
                 case '$clear':  //effacer tous les messages du channel (marche pas)
+                toReturn = '[ATTENTION] Cette commande est expérimentale et rique de ne pas fonctionner. A utiliser avec prudence donc.'
                     clearChannel.clearChannel(message);
                     break;
                 default:
