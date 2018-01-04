@@ -22,10 +22,13 @@ var commandes = [
     /* 18 */"\t**$inventaire jeter <objet|numéro> Vous vous débarassez de l'bjet en question.",
     /* 19 */"\t**$payer <joueur|id> <montant>** \t Paye la somme spécifiée au joueur désigné."
 ];
-var metiers = []
+var metiers = ["patron","employé", "policier", "banquier", "ambulancier", "chomage"];
+
+
+
 module.exports = {
     analyseMessage: function (message) {
-        var entree = message.content.split(" ");
+        var entree = message.content.toLowerCase().split(" ");
         var toReturn;
         if (entree[0].charAt(0)=="$") {
             toReturn = '';
@@ -76,7 +79,7 @@ module.exports = {
                             } else { toReturn = renvoyer([0,3,10], toReturn); }
                             break;
                         default:
-                            toReturn = renvoyer([0,3,15], toReturn);
+                            toReturn = renvoyer([0,3], toReturn);
                     }
                     break;
                 case '$métier': //métier
