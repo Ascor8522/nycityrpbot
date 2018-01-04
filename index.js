@@ -9,7 +9,6 @@ const getToken = require('./js/getToken.js');
 const analyseMessage = require('./js/analyseMessage.js');
 
 var data;
-
 loadData.loadData(function (err, result){
     if(err) {
         console.error('[DATA] Les données n\'ont pas pu être récupérées.');
@@ -42,7 +41,7 @@ BOT.on('ready', () => {
 BOT.on('message', message => {
     if (message.author.id!="397490345585278977") {  //le bot ne peut pas réagir à ses propres messages
         if(message.channel.id=="397785283548151808") {  //messages unqiement acceptés dans le channel de test
-            let reponse = analyseMessage.analyseMessage(message);
+            let reponse = analyseMessage.analyseMessage(message, data);
             if (reponse != undefined) {  // répondre uniquement si réponse présente
                 message.reply(reponse);
             }
@@ -50,5 +49,3 @@ BOT.on('message', message => {
         }
     }
 });
-
-//backup.backup(data);

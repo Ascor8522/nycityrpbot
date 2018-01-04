@@ -1,8 +1,17 @@
 {
     "joueurs":[
-        {"id":"274241336490852353", "metier":"", "salaireMetier":"", "dateARecuSalaire":"", "banque":"", "portefeuille":"", "inventaire":""},
-        {"id":"345196770273394708", "metier":"", "salaireMetier":"", "dateARecuSalaire":"", "banque":"", "portefeuille":"", "inventaire":""},
-        {"id":"358967614388830219", "metier":"", "salaireMetier":"", "dateARecuSalaire":"", "banque":"", "portefeuille":"", "inventaire":""},
-        {"id":"276060004262477825", "metier":"", "salaireMetier":"", "dateARecuSalaire":"", "banque":"", "portefeuille":"", "inventaire":""}
-    ]
+      {"id":"", "metier":"", "salaireMetier":"", "dateARecuSalaire":"", "banque":"", "portefeuille":"", "inventaire":"", "dateInscription":""}
+    ],
+		"metiers":[
+			{"fonction":"patron", "salaireMin":"2450", "salaireMax":"2450"},
+			{"fonction":"employe", "salaireMin":"1050", "salaireMax":"1450"},
+			{"fonction":"policier", "salaireMin":"1150", "salaireMax":"1500"},
+			{"fonction":"banquier", "salaireMin":"1250", "salaireMax":"1500"},
+			{"fonction":"ambulancier", "salaireMin":"1600", "salaireMax":"1850"},
+			{"fonction":"pompier", "salaireMin":"1600", "salaireMax":"1850"},
+			{"fonction":"chomage", "salaireMin":"850", "salaireMax":"850"},
+		],
+		"entreprises":[
+			{"nom":"", "nombreTravailleurs":"", "trvailleurs":"", "dateCreation":""}
+		]
 }

@@ -1,5 +1,19 @@
 const clearChannel = require('./clearChannel.js');
 const newPlayer = require('./newPlayer.js');
+const loadData = require('./js/loadData.js');
+
+var data;
+loadData.loadData(function (err, result){
+    if(err) {
+        console.error('[DATA] Les données n\'ont pas pu être récupérées.');
+        return console.log(err);
+    } else {
+        console.log('[DATA] Les données ont été récupérées.');
+        data = result;
+        data = JSON.parse(data);
+    }
+});
+
 var commandes = [
     /* 0  */"Commande inconnue. Tapez **$help** pour avoir le liste des commandes.",
     /* 1  */"\t**$help** \t Affiche la liste de toutes les commandes.",
@@ -27,7 +41,8 @@ var metiers = ["patron","employé", "policier", "banquier", "ambulancier", "chom
 
 
 module.exports = {
-    analyseMessage: function (message) {
+    analyseMessage: function (message, backup) {
+				data = backup;
         var entree = message.content.toLowerCase().split(" ");
         var toReturn;
         if (entree[0].charAt(0)=="$") {
@@ -133,4 +148,11 @@ function renvoyer (tab, toReturn) {
     }
     toReturn = toReturn + commandes[tab[tab.length-1]];
     return toReturn;
+}
+
+function joueurExiste(id){
+	var existe = false;
+	for (var i=0;i<longueur();i++) {
+		if ()
+	}
 }
