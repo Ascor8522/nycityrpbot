@@ -34,7 +34,8 @@ var commandes = [
     /* 16 */"\t**$métier quitter** \t Vous quittez votre métier et vous retrouvez sans emploi.",
     /* 17 */"\t**$inventaire ouvrir** \t Ouvre votre inventaire et vous montre son contenu.",
     /* 18 */"\t**$inventaire jeter <objet|numéro> Vous vous débarassez de l'bjet en question.",
-    /* 19 */"\t**$payer <joueur|id> <montant>** \t Paye la somme spécifiée au joueur désigné."
+    /* 19 */"\t**$payer <joueur|id> <montant>** \t Paye la somme spécifiée au joueur désigné.",
+    /* 20 */"\t**$entreprise virer <joueur|id> <motif>** \t Vire la personne pour un certain motif. (La perssoner virée se verra payer "
 ];
 var metiers = ["patron","employé", "policier", "banquier", "ambulancier", "chomage"];
 
@@ -132,6 +133,9 @@ module.exports = {
                 case '$clear':  //effacer tous les messages du channel (marche pas)
                 toReturn = '[ATTENTION] Cette commande est expérimentale et rique de ne pas fonctionner. A utiliser avec prudence donc.'
                     clearChannel.clearChannel(message);
+                    break;
+                case '$data':
+                    toReturn = data;
                     break;
                 default:
                     toReturn = commandes[0];
