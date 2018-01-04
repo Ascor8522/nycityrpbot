@@ -1,6 +1,6 @@
 const clearChannel = require('./clearChannel.js');
 const newPlayer = require('./newPlayer.js');
-const loadData = require('./js/loadData.js');
+const loadData = require('./loadData.js');
 
 var data;
 loadData.loadData(function (err, result){
@@ -152,7 +152,8 @@ function renvoyer (tab, toReturn) {
 
 function joueurExiste(id){
 	var existe = false;
-	for (var i=0;i<longueur();i++) {
-		if ()
-	}
+	/*for (var i=0;i<longueur();i++) {
+    }
+    */
+    return existe;
 }
