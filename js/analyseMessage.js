@@ -3,16 +3,18 @@ const newPlayer = require('./newPlayer.js');
 const loadData = require('./loadData.js');
 
 var data;
-loadData.loadData(function (err, result){
-    if(err) {
-        console.error('[DATA] Les données n\'ont pas pu être récupérées.');
-        return console.log(err);
-    } else {
-        console.log('[DATA] Les données ont été récupérées.');
-        data = result;
-        data = JSON.parse(data);
-    }
-});
+function load () {
+    loadData.loadData(function (err, result){
+        if(err) {
+            console.error("[DATA] Les données n\'ont pas pu être récupérées.");
+            return console.log(err);
+        } else {
+            console.log("[DATA] Les données ont été récupérées.");
+            data = result;
+            data = JSON.parse(data);
+        }
+    });
+}
 
 var commandes = [
     /* 0  */"Commande inconnue. Tapez **$help** pour avoir le liste des commandes.",
@@ -22,20 +24,26 @@ var commandes = [
     /* 4  */"\t**$magasin help** \t Affiche l'aide concernant le magasin.",
     /* 5  */"\t**$métier help** \t Affiche l'aide concernant les métiers.",
     /* 6  */"\t**$inventaire help** \t Affiche l'aide concernant l'inventaire.",
-    /* 7  */"\t**$banque compte ouvrir** \t Ouvre un compte en banque à votre nom.",
-    /* 8  */"\t**$banque compte cloturer** \t Cloture votre compte en banque et met votre argent dans votre inventaire.",
-    /* 9  */"\t**$banque déposer <montant>** \t Dépose le montant d'argent que vous avez sur vous sur votre compte en banque.",
-    /* 10 */"\t**$banque retrait <montant>** \t Retire le montant d'argent de votre compte et le place dans votre inventaire.",
-    /* 11 */"\t**$banque verser <joueur|id> <montant>** \t Verse un certaint montant d'argent à un joueur depuis votre compte.",
-    /* 12 */"\t**$magasin stock** \t Affiche les stocks disponibles dans le magasin ainsi que le prix des objets.",
-    /* 13 */"\t**$magasin acheter <nom|numéro> <quantité>** Achête les objets dans le magasin et les met dans votre inventaire.",
-    /* 14 */"\t**$métier liste** \t Affiche la liste de tous les métiers et salaires.",
-    /* 15 */"\t**$métier postuler <métier>** \t Vous affecte un nouveau métier.",
-    /* 16 */"\t**$métier quitter** \t Vous quittez votre métier et vous retrouvez sans emploi.",
-    /* 17 */"\t**$inventaire ouvrir** \t Ouvre votre inventaire et vous montre son contenu.",
-    /* 18 */"\t**$inventaire jeter <objet|numéro> Vous vous débarassez de l'bjet en question.",
-    /* 19 */"\t**$payer <joueur|id> <montant>** \t Paye la somme spécifiée au joueur désigné.",
-    /* 20 */"\t**$entreprise virer <joueur|id> <motif>** \t Vire la personne pour un certain motif. (La perssoner virée se verra payer "
+    /* 7  */"\t**$payer help** \t Affiche l'aide sur comment payer quelqu'un.",
+    /* 8  */"\t**$entreprise help** \t Affiche l'aide concernant les entreprises.",
+    /* 9  */"\t**$banque compte ouvrir** \t Ouvre un compte en banque à votre nom.",
+    /* 10 */"\t**$banque compte cloturer** \t Cloture votre compte en banque et met votre argent dans votre inventaire.",
+    /* 11 */"\t**$banque déposer <montant>** \t Dépose le montant d'argent que vous avez sur vous sur votre compte en banque.",
+    /* 12 */"\t**$banque retrait <montant>** \t Retire le montant d'argent de votre compte et le place dans votre inventaire.",
+    /* 13 */"\t**$banque verser <pseudo joueur|id> <montant>** \t Verse un certaint montant d'argent à un joueur depuis votre compte.",
+    /* 14 */"\t**$magasin stock** \t Affiche les stocks disponibles dans le magasin ainsi que le prix des objets.",
+    /* 15 */"\t**$magasin acheter <nom ojet|numéro> <quantité>** Achête les objets dans le magasin et les met dans votre inventaire.",
+    /* 16 */"\t**$métier liste** \t Affiche la liste de tous les métiers et salaires.",
+    /* 17 */"\t**$métier postuler <nom métier>** \t Vous affecte un nouveau métier.",
+    /* 18 */"\t**$métier quitter** \t Vous quittez votre métier et vous retrouvez sans emploi.",
+    /* 19 */"\t**$inventaire ouvrir** \t Ouvre votre inventaire et vous montre son contenu.",
+    /* 20 */"\t**$inventaire jeter <nom objet|numéro> Vous vous débarassez de l'bjet en question.",
+    /* 21 */"\t**$payer <pseudo joueur|id> <montant>** \t Paye la somme spécifiée au joueur désigné.",
+    /* 22 */"\t**$entreprise liste** \t Affiche la liste de toutes les entreprises",
+    /* 23 */"\t**$entreprise postuler <nom entreprise> \t Vous demandez pour rejoindre l'entreprise indiquée.",
+    /* 24 */"\t**$entreprise virer <pseudo joueur|id> <motif>** \t Vire la personne pour un certain motif.\n\t(La personne virée se verra payée l'équivalemnt de 3 mois de salaire comme indemnités.",
+    /* 25 */"\t**$entreprise employés <nom entreprise>** \t Affiche la liste des employés de l'entreprise indiquée."
+
 ];
 var metiers = ["patron","employé", "policier", "banquier", "ambulancier", "chomage"];
 
@@ -47,108 +55,56 @@ module.exports = {
         var entree = message.content.toLowerCase().split(" ");
         var toReturn;
         if (entree[0].charAt(0)=="$") {
-            toReturn = '';
+            toReturn = "";
             switch (entree[0]) {
-                case '$help':   //aide
-                    toReturn = renvoyer([1,2,3,4,5,6],toReturn);
-                    break;
-                case '$banque': //banque
-                case '$bank':
+                case "$help": toReturn = renvoyer([1,2,3,4,5,6,7,8],toReturn); break;
+                case "$banque": //banque
+                case "$bank":
                     switch (entree[1]) {
-                        case 'help':
-                            toReturn = renvoyer([7,8,9,10,11], toReturn);
-                            break;
-                        case 'compte':
+                        case "help": toReturn = renvoyer([9,10,11,12,13], toReturn); break;
+                        case "compte":
                             switch (entree[2]) {
-                                case 'ouvrir':
-                                case 'créer':
-                                case 'creer':
-                                case 'nouveau':
-                                    if (entree.length<4) {
-                                        //OUVRIR UN COMPTE
-                                        toReturn = 'Cette fonction sera ajoutée prochainement';
-                                    } else { toReturn = renvoyer([0,3,7],toReturn); }
-                                    break;
-                                case 'cloturer':
-                                case 'fermer':
-                                case 'suprimmer':
-                                    if (entree.length<4) {
-                                        //CLOTURER UN COMPTE
-                                        toReturn = 'Cette fonction sera ajoutée prochainement';
-                                    } else { toReturn = renvoyer([0,3,8],toReturn); }
-                                    break;
-                                default:
-                                    toReturn = renvoyer([0, 3, 7, 8], toReturn);
-                                    break;
+                                case "ouvrir":
+                                case "créer":
+                                case "creer":
+                                case "nouveau": if (entree.length<4) { /* TODO Créer compte*/ toReturn = prochainement(); } else { toReturn = renvoyer([0,3,9],toReturn); } break;
+                                case "cloturer":
+                                case "fermer":
+                                case "suprimmer": if (entree.length<4) { /*TODO Suprimmer compte */ toReturn = prochainement(); } else { toReturn = renvoyer([0,3,10],toReturn); } break;
+                                default: toReturn = renvoyer([0, 3, 9, 10], toReturn); break;
                             }
-                            break;
-                        case 'déposer':
-                        case 'ajouter':
-                            if (entree.length<4) {
-                                // DEPOSER
-                            } else { toReturn = renvoyer([0,3,9], toReturn); }
-                            break;
-                        case 'retrait':
-                        case 'retirer':
-                            if (entree.length<4) {
-                                // RETRAIT
-                            } else { toReturn = renvoyer([0,3,10], toReturn); }
-                            break;
-                        default:
-                            toReturn = renvoyer([0,3], toReturn);
-                    }
-                    break;
-                case '$métier': //métier
-                case '$metier':
-                case '$job':
+                        case "déposer":
+                        case "ajouter": if (entree.length<4) { /* TODO Déposer banque*/ toReturn = prochainement(); } else { toReturn = renvoyer([0,3,11], toReturn); } break;
+                        case "retrait":
+                        case "retirer": if (entree.length<4) { /* TODO Retirer banque*/ toReturn = prochainement(); } else { toReturn = renvoyer([0,3,12], toReturn); } break;
+                        default: toReturn = renvoyer([0,3], toReturn);
+                    } 
+                case "$métier": //métier
+                case "$metier":
+                case "$job":
                     switch (entree[1]) {
-                        case 'help':
-                            toReturn = renvoyer([14,15,16], toReturn);
-                            break;
-                        case 'liste':
-                            if (entree.length<3) {
-                                //LISTE DES METIERS
-                            } else { toReturn = renvoyer([0,5,14], toReturn); }
-                            break;
-                        case 'postuler':
-                            if (entree.length<4) {
-                                if(metiers.includes(entree[2])) {
-                                    // AJOUTER METIER
-                                } else { toReturn = renvoyer([0,5,14], toReturn); }
-                            } else { toReturn = renvoyer([0,5,16], toReturn); }
-                            break;
-                        case 'quitter':
-                            if (entree.length<3) {
-                                //QUITTER UN METIER
-                            } else { toReturn = renvoyer([0,5,16], toReturn); }
-                            break;
-                        default:
-                        toReturn = renvoyer([0,5], toReturn);
-                            break;
+                        case "help": toReturn = renvoyer([16,17,18], toReturn); break;
+                        case "liste": if (entree.length<3) { /* TODO Liste metiers */ toReturn = prochainement(); } else { toReturn = renvoyer([0,5,16], toReturn); } break;
+                        case "postuler": if (entree.length<4) { if(metiers.includes(entree[2])) { /* TODO Joindre metier*/ toReturn = prochainement(); } else { toReturn = renvoyer([0,5,16], toReturn); } } else { toReturn = renvoyer([0,5,18], toReturn); } break;
+                        case "quitter": if (entree.length<3) { /* TODO Quitter metier */ toReturn = prochainement(); } else { toReturn = renvoyer([0,5,18], toReturn); } break;
+                        default: toReturn = renvoyer([0,5], toReturn); break;
                     }
-                    break;
-                case '$jouer':
-                    newPlayer.newPlayer(message);
-                    break;
-                case '$clear':  //effacer tous les messages du channel (marche pas)
-                toReturn = '[ATTENTION] Cette commande est expérimentale et rique de ne pas fonctionner. A utiliser avec prudence donc.'
-                    clearChannel.clearChannel(message);
-                    break;
-                case '$data':
-                    toReturn = data;
-                    break;
-                default:
-                    toReturn = commandes[0];
+                case "$jouer": if (entree.length<2) { /* TODO Nouveau joueur */newPlayer.newPlayer(message); } else { toReturn = renvoyer([0,2], toReturn); } break;
+                case "$clear": toReturn = "**[ATTENTION] Cette commande est expérimentale et rique de ne pas fonctionner. A utiliser avec prudence donc.**"; clearChannel.clearChannel(message); break;
+                case "$data": toReturn = "**[ATTENTION] Cette commande est expérimentale et rique de ne pas fonctionner. A utiliser avec prudence donc.**\n" + JSON.stringify(data); break;
+                default: toReturn = commandes[0];
                 }
         }
         return toReturn;
     }
 }
 
+function prochainement(){ return "Cette fonction sera ajoutée prochainement"; }
+
 function renvoyer (tab, toReturn) {
     toReturn = "\n" + toReturn;
     for(var i=0;i<tab.length-1;i++) {
-        toReturn = toReturn+ commandes[tab[i]] + '\n';
+        toReturn = toReturn+ commandes[tab[i]] + "\n";
     }
     toReturn = toReturn + commandes[tab[tab.length-1]];
     return toReturn;

@@ -8,7 +8,9 @@ const loadData = require('./js/loadData.js');
 const getToken = require('./js/getToken.js');
 const analyseMessage = require('./js/analyseMessage.js');
 
+
 var data;
+
 loadData.loadData(function (err, result){
     if(err) {
         console.error('[DATA] Les données n\'ont pas pu être récupérées.');
@@ -32,6 +34,7 @@ getToken.getToken(function(err, result){
 });
 
 BOT.on('ready', () => {
+    BOT.user.setPresence({ game: { name: 'New-York City RP', type: 0 } }); // jeu en cours
     console.log('[BOT] Bot prêt!');
     console.log('[BOT] Connecté en tant que '+ BOT.user.tag);
     //data =  loadData.loadData();
