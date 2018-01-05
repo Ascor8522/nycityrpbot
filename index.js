@@ -45,7 +45,7 @@ BOT.on('message', message => {
     if (message.author.id!="397490345585278977") {  //le bot ne peut pas réagir à ses propres messages
         if(message.channel.id=="397785283548151808") {  //messages unqiement acceptés dans le channel de test
             let reponse = analyseMessage.analyseMessage(message, data);
-            if (reponse != undefined) {  // répondre uniquement si réponse présente
+            if (reponse != undefined && reponse!="") {  // répondre uniquement si réponse présente
                 message.reply(reponse);
             }
             return;
