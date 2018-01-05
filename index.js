@@ -8,6 +8,7 @@ const loadData = require('./js/loadData.js');
 const getToken = require('./js/getToken.js');
 const analyseMessage = require('./js/analyseMessage.js');
 
+
 var data;
 
 loadData.loadData(function (err, result){
@@ -33,6 +34,7 @@ getToken.getToken(function(err, result){
 });
 
 BOT.on('ready', () => {
+    BOT.user.setPresence({ game: { name: 'New-York City RP', type: 0 } }); // jeu en cours
     console.log('[BOT] Bot prêt!');
     console.log('[BOT] Connecté en tant que '+ BOT.user.tag);
     //data =  loadData.loadData();
@@ -42,13 +44,11 @@ BOT.on('ready', () => {
 BOT.on('message', message => {
     if (message.author.id!="397490345585278977") {  //le bot ne peut pas réagir à ses propres messages
         if(message.channel.id=="397785283548151808") {  //messages unqiement acceptés dans le channel de test
-            let reponse = analyseMessage.analyseMessage(message);
-            if (reponse != undefined) {  // répondre uniquement si réponse présente
+            let reponse = analyseMessage.analyseMessage(message, data);
+            if (reponse != undefined && reponse!="") {  // répondre uniquement si réponse présente
                 message.reply(reponse);
             }
             return;
         }
     }
 });
-
-//backup.backup(data);
