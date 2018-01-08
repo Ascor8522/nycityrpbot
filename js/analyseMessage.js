@@ -51,22 +51,23 @@ var metiers = ["patron","employe", "policier", "banquier", "ambulancier", "choma
 
 
 module.exports = {
-    analyseMessage: function (message, backup) {
-				data = backup;
+    analyseMessage: function (message) {
+		data = load();
         var entree = message.content.toLowerCase().split(" ");
+				for (var i =0;i<entree.length;i++) { entree[i] = entree[i].normalize('NFD').replace(/[\u0300-\u036f]/g, "")}
         var toReturn;
         if (entree[0].charAt(0)=="$") {
             toReturn = "";
-            switch (entree[0].normalize('NFD').replace(/[\u0300-\u036f]/g, "")) {
+            switch (entree[0]) {
                 case "$help":
                 case "$bot":
                 case "$aide": if (entree.length==1) { toReturn = renvoyer([1,2,3,4,5,6,7,8],toReturn); } else { toReturn = renvoyer([0,1], toReturn); } break;
                 case "$jouer":
                 case "$play":
-                case "$join": if (entree.length==1) { /* TODO Nouveau joueur */ toReturn = prochainement(); newPlayer.newPlayer(message); } else { toReturn = renvoyer([0,2], toReturn); } break;
+                case "$join": if (entree.length==1) { /* TODO Nouveau joueur */ toReturn = prochainement(); if(!joueurExiste(message.author.id)){ newPlayer.newPlayer(message.author.id); } else { toReturn = ""; } } else { toReturn = renvoyer([0,2], toReturn); } break;
                 case "$banque": //banque
                 case "$bank":
-                    switch (entree[1].normalize('NFD').replace(/[\u0300-\u036f]/g, "")) {
+                    switch (entree[1]) {
                         case "help": if (entree.length==2) { toReturn = renvoyer([9,10,11,12,13], toReturn); } else { toReturn = renvoyer([0,3], toReturn); } break;
                         case "compte":
                             switch (entree[2]) {
@@ -106,7 +107,7 @@ module.exports = {
                     switch (entree[1]) {
                         case "help": if (entree.length==2) { toReturn = renvoyer([19,20], toReturn); } else { toReturn = renvoyer([0,6], toReturn); } break;
                         case "ouvrir": if (entree.length==2) { /* TODO Ouvrir inventaire */ toReturn = prochainement(); } else { toReturn = renvoyer([0,6,19], toReturn); } break;
-                        default: toReturn = renvoyer([0,6], toReturn);   
+                        default: toReturn = renvoyer([0,6], toReturn);
                     } break;
                 case "$payer":
                     if (entree.length==3) {
@@ -118,7 +119,7 @@ module.exports = {
                 case "$societe":
                 case "$boite":
                 case "$firme":
-                    switch (entree[1].normalize('NFD').replace(/[\u0300-\u036f]/g, "")) {
+                    switch (entree[1]) {
                         case "help": if (entree.length==2) { toReturn = renvoyer([22,23,24,25], toReturn); } else { toReturn = renvoyer([0,8], toReturn); } break;
                         case "liste": if (entree.length==2) { /* TODO Liste entreprises */ toReturn = prochainement(); } else { toReturn = renvoyer([0,8,22], toReturn); } break;
                         case "postuler": if (entree.length==3) { /* TODO Postuler entreprise */ toReturn = prochainement(); } else { toReturn = renvoyer([0,8,23], toReturn); } break;
@@ -160,8 +161,13 @@ function renvoyer (tab, toReturn) {
 
 function joueurExiste(id){
 	var existe = false;
-	/*for (var i=0;i<longueur();i++) {
-    }
-    */
-    return existe;
+	for (id in data) {
+		if(data.joueurs[i].id==id) {
+			existe=true;
+			console.log("[JOUEUR] Ce joueur n'existe déjà.");
+			break;
+		}
+	}
+	if (!existe) {console.log("[JOUEUR] Ce joueur n'existait pas encore.\nId : "+id);}
+  return existe;
 }

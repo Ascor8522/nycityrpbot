@@ -8,7 +8,7 @@ const loadData = require('./js/loadData.js');
 const getToken = require('./js/getToken.js');
 const analyseMessage = require('./js/analyseMessage.js');
 
-
+/*
 var data;
 
 loadData.loadData(function (err, result){
@@ -21,7 +21,7 @@ loadData.loadData(function (err, result){
         data = JSON.parse(data);
     }
 });
-
+*/
 
 getToken.getToken(function(err, result){
     if(err) {
@@ -44,7 +44,8 @@ BOT.on('ready', () => {
 BOT.on('message', message => {
     if (message.author.id!="397490345585278977") {  //le bot ne peut pas réagir à ses propres messages
         if(message.channel.id=="397785283548151808") {  //messages unqiement acceptés dans le channel de test
-            let reponse = analyseMessage.analyseMessage(message, data);
+            console.log("[MSG] de " + message.author.username);
+            let reponse = analyseMessage.analyseMessage(message);
             if (reponse != undefined && reponse!="") {  // répondre uniquement si réponse présente
                 message.reply(reponse);
             }

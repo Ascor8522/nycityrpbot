@@ -10,6 +10,6 @@ module.exports = {
                 console.log("[BACKUP] Données sauvegardées.");
                 return;
             }
-        }); 
+        });
     }
 }
