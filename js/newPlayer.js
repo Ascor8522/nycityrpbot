@@ -15,21 +15,29 @@ module.exports = {
                 console.log('[DATA] Les données ont été récupérées.');
                 data = result;
                 data = JSON.parse(data);
+
+                var newplayer = new Player(message);
+
+                console.log(JSON.stringify(data));
+                data["joueurs"].push(newplayer);
+                console.log(JSON.stringify(data));
+                /*backup.backup(data);
+                paySalary.paySalary(message.author.id);
+                */
             }
         });
-        var player = {};
-        player.id = message.id;
-        player.metier = "chomage";
-        d.getTime();
-        player.dateARecuSalaire = n;
-        player.banque = 0;
-        player.portefeuille = 0;
-        player.inventaire = [];
-        d.getTime();
-        player.dateInscription = n;
-        player.notification = [];
-        data["joueurs"].push(player);
-        backup.backup(data);
-        paySalary.paySalary(message.author.id);
     }
+}
+
+function Player (message) {
+    this.id = message.id;
+    this.metier = "chomage";
+    d.getTime();
+    this.dateARecuSalaire = n;
+    this.banque = 0;
+    this.portefeuille = 0;
+    this.inventaire = [];
+    d.getTime();
+    this.dateInscription = n;
+    this.notification = [];
 }
