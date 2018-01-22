@@ -8,8 +8,9 @@ const loadData = require('./js/loadData.js');
 const getToken = require('./js/getToken.js');
 const analyseMessage = require('./js/analyseMessage.js');
 
-/*
 var data;
+
+process.stdout.write('\033c');
 
 loadData.loadData(function (err, result){
     if(err) {
@@ -21,7 +22,7 @@ loadData.loadData(function (err, result){
         data = JSON.parse(data);
     }
 });
-*/
+
 
 getToken.getToken(function(err, result){
     if(err) {
