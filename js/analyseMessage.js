@@ -1,8 +1,10 @@
 const clearChannel = require('./clearChannel.js');
 const newPlayer = require('./newPlayer.js');
 const loadData = require('./loadData.js');
+const joueurExiste = require('./joueurExiste.js');
 
 var data;
+
 function load () {
     loadData.loadData(function (err, result){
         if(err) {
@@ -48,8 +50,6 @@ var commandes = [
 ];
 var metiers = ["patron","employe", "policier", "banquier", "ambulancier", "chomage"];
 
-
-
 module.exports = {
     analyseMessage: function (message) {
 		data = load();
@@ -64,7 +64,7 @@ module.exports = {
                 case "$aide": if (entree.length==1) { toReturn = renvoyer([1,2,3,4,5,6,7,8],toReturn); } else { toReturn = renvoyer([0,1], toReturn); } break;
                 case "$jouer":
                 case "$play":
-                case "$join": if (entree.length==1) { /* TODO Nouveau joueur */ toReturn = prochainement(); if(!joueurExiste(message.author.id)){ newPlayer.newPlayer(message.author.id); } else { toReturn = ""; } } else { toReturn = renvoyer([0,2], toReturn); } break;
+                case "$join": if (entree.length==1) { /* TODO Nouveau joueur */ toReturn = prochainement(); if(!joueurExiste.joueurExiste(message.author.id)){ newPlayer.newPlayer(message.author.id); } else { toReturn = ""; } } else { toReturn = renvoyer([0,2], toReturn); } break;
                 case "$banque": //banque
                 case "$bank":
                     switch (entree[1]) {
@@ -157,17 +157,4 @@ function renvoyer (tab, toReturn) {
     }
     toReturn = toReturn + commandes[tab[tab.length-1]];
     return toReturn;
-}
-
-function joueurExiste(id){
-	var existe = false;
-	for (id in data) {
-		if(data.joueurs[i].id==id) {
-			existe=true;
-			console.log("[JOUEUR] Ce joueur n'existe déjà.");
-			break;
-		}
-	}
-	if (!existe) {console.log("[JOUEUR] Ce joueur n'existait pas encore.\nId : "+id);}
-  return existe;
 }

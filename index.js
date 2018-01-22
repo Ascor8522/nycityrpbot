@@ -43,7 +43,7 @@ BOT.on('ready', () => {
 });
 
 BOT.on('message', message => {
-    if (message.author.id!="397490345585278977") {  //le bot ne peut pas réagir à ses propres messages
+    if (!message.author.bot) {  //le bot ne peut pas réagir à ses propres messages
         if(message.channel.id=="397785283548151808") {  //messages unqiement acceptés dans le channel de test
             console.log("[MSG] de " + message.author.username);
             let reponse = analyseMessage.analyseMessage(message);
