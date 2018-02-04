@@ -8,20 +8,9 @@ const loadData = require('./js/loadData.js');
 const getToken = require('./js/getToken.js');
 const analyseMessage = require('./js/analyseMessage.js');
 
-var data;
-
 process.stdout.write('\033c');
 
-loadData.loadData(function (err, result){
-    if(err) {
-        console.error('[DATA] Les données n\'ont pas pu être récupérées.');
-        return console.log(err);
-    } else {
-        console.log('[DATA] Les données ont été récupérées.');
-        data = result;
-        data = JSON.parse(data);
-    }
-});
+loadData.loadData();
 
 
 getToken.getToken(function(err, result){
@@ -43,7 +32,7 @@ BOT.on('ready', () => {
 });
 
 BOT.on('message', message => {
-    if (!message.author.bot) {  //le bot ne peut pas réagir à ses propres messages
+    if (!message.author.bot) {  //le bot ne peut pas réagir aux messages des bots
         if(message.channel.id=="397785283548151808") {  //messages unqiement acceptés dans le channel de test
             console.log("[MSG] de " + message.author.username);
             let reponse = analyseMessage.analyseMessage(message);

@@ -1,11 +1,17 @@
 const backup = require("./backup.js");
 const loadData = require("./loadData");
 const paySalary = require("./paySalary.js");
+const joueurExiste = require('./joueurExiste.js');
 var d = new Date;
 var n;
 
 module.exports = {
-    newPlayer: function (message) {
+    newPlayer: function newPlayer(message) {
+        if(!joueurExiste.joueurExiste(message.author.id)) {
+
+        } else {
+            message.reply("Tu es déjà inscrit!")
+        }
         /*
         var newplayer = new Player(message);
         console.log(JSON.stringify(data));
@@ -29,4 +35,4 @@ function Player (message) {
     this.dateInscription = n;
     this.notification = [];
 }
- 
+

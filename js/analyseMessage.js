@@ -1,22 +1,6 @@
 const clearChannel = require('./clearChannel.js');
 const newPlayer = require('./newPlayer.js');
 const loadData = require('./loadData.js');
-const joueurExiste = require('./joueurExiste.js');
-
-var data;
-
-function load () {
-    loadData.loadData(function (err, result){
-        if(err) {
-            console.error("[DATA] Les données n\'ont pas pu être récupérées.");
-            return console.log(err);
-        } else {
-            console.log("[DATA] Les données ont été récupérées.");
-            data = result;
-            data = JSON.parse(data);
-        }
-    });
-}
 
 var commandes = [
     /* 0  */"Commande inconnue. Tapez **$help** pour avoir le liste des commandes.",
@@ -46,13 +30,13 @@ var commandes = [
     /* 23 */"\t**$entreprise postuler <nom entreprise>** \t Vous demandez pour rejoindre l'entreprise indiquée.",
     /* 24 */"\t**$entreprise virer <pseudo joueur|id> <motif>** \t Vire la personne pour un certain motif.\n\t(La personne virée se verra payée l'équivalemnt de 3 mois de salaire comme indemnités.",
     /* 25 */"\t**$entreprise employés <nom entreprise>** \t Affiche la liste des employés de l'entreprise indiquée."
-
 ];
+
 var metiers = ["patron","employe", "policier", "banquier", "ambulancier", "chomage"];
 
 module.exports = {
     analyseMessage: function (message) {
-		data = load();
+		data2 = loadData.loadData();
         var entree = message.content.toLowerCase().split(" ");
 				for (var i =0;i<entree.length;i++) { entree[i] = entree[i].normalize('NFD').replace(/[\u0300-\u036f]/g, "")}
         var toReturn;
@@ -64,7 +48,7 @@ module.exports = {
                 case "$aide": if (entree.length==1) { toReturn = renvoyer([1,2,3,4,5,6,7,8],toReturn); } else { toReturn = renvoyer([0,1], toReturn); } break;
                 case "$jouer":
                 case "$play":
-                case "$join": if (entree.length==1) { /* TODO Nouveau joueur */ toReturn = prochainement(); if(!joueurExiste.joueurExiste(message.author.id)){ newPlayer.newPlayer(message.author.id); } else { toReturn = ""; } } else { toReturn = renvoyer([0,2], toReturn); } break;
+                case "$join": if (entree.length==1) { /* TODO Nouveau joueur */ toReturn = prochainement(); newPlayer.newPlayer(message); } else { toReturn = renvoyer([0,2], toReturn); } break;
                 case "$banque": //banque
                 case "$bank":
                     switch (entree[1]) {
@@ -128,7 +112,7 @@ module.exports = {
                         default: toReturn = renvoyer([0,8], toReturn);
                     } break;
                 case "$clear": if (entree.length==1) { toReturn = "**[ATTENTION] Cette commande est expérimentale et rique de ne pas fonctionner. A utiliser avec prudence donc.**"; clearChannel.clearChannel(message); } else { toReturn = renvoyer([0], toReturn); } break;
-                case "$data": if (entree.length==1) { toReturn = "**[ATTENTION] Cette commande est expérimentale et rique de ne pas fonctionner. A utiliser avec prudence donc.**\n" + JSON.stringify(data); } else { toReturn = renvoyer([0], toReturn); } break;
+                case "$data": if (entree.length==1) { toReturn = "**[ATTENTION] Cette commande est expérimentale et rique de ne pas fonctionner. A utiliser avec prudence donc.**\n" + JSON.stringify(data2); } else { toReturn = renvoyer([0], toReturn); } break;
                 case "$all":
                 case "$commandes":
                 case "$commands": if (entree.length==1) { all(message); } else { toReturn = renvoyer([0], toReturn); } break;
