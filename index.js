@@ -5,36 +5,27 @@ const FS = require('fs');
 
 const backup = require('./js/backup.js');
 const loadData = require('./js/loadData.js');
-const getToken = require('./js/getToken.js');
 const analyseMessage = require('./js/analyseMessage.js');
+const token = require('./js/token.js');
 
 process.stdout.write('\033c');
 
 loadData.loadData();
 
-
-getToken.getToken(function(err, result){
-    if(err) {
-        console.error('[BOT] Le token est incorrect, le bot n\'a pas démarré.');
-        return console.error(err);
-    } else {
-        BOT.login(result);
-        console.log('[BOT] Le bot a démarré.');
-    }
-});
+console.log('[TOKEN] ' + token.token);
+BOT.login(token.token);
+console.log('[BOT] Le bot a démarré.');
 
 BOT.on('ready', () => {
-    BOT.user.setPresence({ game: { name: 'New-York City RP', type: 0 } }); // jeu en cours
-    console.log('[BOT] Bot prêt!');
+    BOT.user.setPresence({ game: { name: 'New-York City RP', type: 0, url:'https://www.twitch.tv/discordapp' } }); // jeu en cours
     console.log('[BOT] Connecté en tant que '+ BOT.user.tag);
-    //data =  loadData.loadData();
-    console.log('[DATA] Données réceptionnées.');
+    console.log('[BOT] Bot prêt!');
 });
 
 BOT.on('message', message => {
     if (!message.author.bot) {  //le bot ne peut pas réagir aux messages des bots
         if(message.channel.id=="397785283548151808") {  //messages unqiement acceptés dans le channel de test
-            console.log("[MSG] de " + message.author.username);
+            console.log("[MSG] Message reçu de " + message.author.username);
             let reponse = analyseMessage.analyseMessage(message);
             if (reponse != undefined && reponse!="") {  // répondre uniquement si réponse présente
                 message.reply(reponse);

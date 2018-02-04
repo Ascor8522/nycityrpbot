@@ -11,5 +11,5 @@ module.exports = {
               //callback(null, data);
           }
       });
-  },
+  }
 }

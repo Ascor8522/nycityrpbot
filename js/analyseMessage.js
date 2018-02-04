@@ -1,38 +1,8 @@
 const clearChannel = require('./clearChannel.js');
 const newPlayer = require('./newPlayer.js');
 const loadData = require('./loadData.js');
-
-var commandes = [
-    /* 0  */"Commande inconnue. Tapez **$help** pour avoir le liste des commandes.",
-    /* 1  */"\t**$help** \t Affiche la liste de toutes les commandes.",
-    /* 2  */"\t**$jouer** \t Créé un profil pour jouer (indispensable).",
-    /* 3  */"\t**$banque help** \t Affiche l'aide concernant la banque.",
-    /* 4  */"\t**$magasin help** \t Affiche l'aide concernant le magasin.",
-    /* 5  */"\t**$métier help** \t Affiche l'aide concernant les métiers.",
-    /* 6  */"\t**$inventaire help** \t Affiche l'aide concernant l'inventaire.",
-    /* 7  */"\t**$payer help** \t Affiche l'aide sur comment payer quelqu'un.",
-    /* 8  */"\t**$entreprise help** \t Affiche l'aide concernant les entreprises.",
-    /*      ////////////////////////////////////////////////////////////////////// */
-    /* 9  */"\t**$banque compte ouvrir** \t Ouvre un compte en banque à votre nom.",
-    /* 10 */"\t**$banque compte cloturer** \t Cloture votre compte en banque et met votre argent dans votre inventaire.",
-    /* 11 */"\t**$banque déposer <montant>** \t Dépose le montant d'argent que vous avez sur vous sur votre compte en banque.",
-    /* 12 */"\t**$banque retrait <montant>** \t Retire le montant d'argent de votre compte et le place dans votre inventaire.",
-    /* 13 */"\t**$banque verser <pseudo joueur|id> <montant>** \t Verse un certaint montant d'argent à un joueur depuis votre compte.",
-    /* 14 */"\t**$magasin stock** \t Affiche les stocks disponibles dans le magasin ainsi que le prix des objets.",
-    /* 15 */"\t**$magasin acheter <nom ojet|numéro> <quantité>** Achête les objets dans le magasin et les met dans votre inventaire.",
-    /* 16 */"\t**$métier liste** \t Affiche la liste de tous les métiers et salaires.",
-    /* 17 */"\t**$métier postuler <nom métier>** \t Vous affecte un nouveau métier.",
-    /* 18 */"\t**$métier quitter** \t Vous quittez votre métier et vous retrouvez sans emploi.",
-    /* 19 */"\t**$inventaire ouvrir** \t Ouvre votre inventaire et vous montre son contenu.",
-    /* 20 */"\t**$inventaire jeter <nom objet|numéro>** Vous vous débarassez de l'bjet en question.",
-    /* 21 */"\t**$payer <pseudo joueur|id> <montant>** \t Paye la somme spécifiée au joueur désigné.",
-    /* 22 */"\t**$entreprise liste** \t Affiche la liste de toutes les entreprises",
-    /* 23 */"\t**$entreprise postuler <nom entreprise>** \t Vous demandez pour rejoindre l'entreprise indiquée.",
-    /* 24 */"\t**$entreprise virer <pseudo joueur|id> <motif>** \t Vire la personne pour un certain motif.\n\t(La personne virée se verra payée l'équivalemnt de 3 mois de salaire comme indemnités.",
-    /* 25 */"\t**$entreprise employés <nom entreprise>** \t Affiche la liste des employés de l'entreprise indiquée."
-];
-
-var metiers = ["patron","employe", "policier", "banquier", "ambulancier", "chomage"];
+const metiers = require('./jobs.js');
+const commandes = require('./commands.js');
 
 module.exports = {
     analyseMessage: function (message) {
@@ -83,7 +53,7 @@ module.exports = {
                     switch (entree[1]) {
                         case "help": if (entree.length==2) { toReturn = renvoyer([16,17,18], toReturn); } else { toReturn = renvoyer([0,5], toReturn); } break;
                         case "liste": if (entree.length==2) { /* TODO Liste metiers */ toReturn = prochainement(); } else { toReturn = renvoyer([0,5,16], toReturn); } break;
-                        case "postuler": if (entree.length==3) { if(metiers.includes(entree[2].normalize('NFD').replace(/[\u0300-\u036f]/g, ""))) { /* TODO Joindre metier*/ toReturn = prochainement(); } else { toReturn = renvoyer([0,5,16], toReturn); } } else { toReturn = renvoyer([0,5,18], toReturn); } break;
+                        case "postuler": if (entree.length==3) { if(metiers.metiers.includes(entree[2].normalize('NFD').replace(/[\u0300-\u036f]/g, ""))) { /* TODO Joindre metier*/ toReturn = prochainement(); } else { toReturn = renvoyer([0,5,16], toReturn); } } else { toReturn = renvoyer([0,5,18], toReturn); } break;
                         case "quitter": if (entree.length==3) { /* TODO Quitter metier */ toReturn = prochainement(); } else { toReturn = renvoyer([0,5,18], toReturn); } break;
                         default: toReturn = renvoyer([0,5], toReturn);
                     } break;
@@ -116,7 +86,7 @@ module.exports = {
                 case "$all":
                 case "$commandes":
                 case "$commands": if (entree.length==1) { all(message); } else { toReturn = renvoyer([0], toReturn); } break;
-                default: toReturn = commandes[0];
+                default: toReturn = commandes.commandes[0];
             }
         }
         return toReturn;
@@ -137,8 +107,8 @@ function all(message) {
 function renvoyer (tab, toReturn) {
     toReturn = "\n" + toReturn;
     for(var i=0;i<tab.length-1;i++) {
-        toReturn = toReturn+ commandes[tab[i]] + "\n";
+        toReturn = toReturn+ commandes.commandes[tab[i]] + "\n";
     }
-    toReturn = toReturn + commandes[tab[tab.length-1]];
+    toReturn = toReturn + commandes.commandes[tab[tab.length-1]];
     return toReturn;
 }
