@@ -3,10 +3,10 @@ const BOT = new DISCORD.Client();
 
 const FS = require('fs');
 
-const backup = require('./js/backup.js');
-const loadData = require('./js/loadData.js');
-const analyseMessage = require('./js/analyseMessage.js');
 const token = require('./js/token.js');
+const loadData = require('./js/loadData.js');
+const backup = require('./js/backup.js');
+const analyseMessage = require('./js/analyseMessage.js');
 
 process.stdout.write('\033c');
 
@@ -17,8 +17,9 @@ BOT.login(token.token);
 console.log('[BOT] Le bot a démarré.');
 
 BOT.on('ready', () => {
-    BOT.user.setPresence({ game: { name: 'New-York City RP', type: 0, url:'https://www.twitch.tv/discordapp' } }); // jeu en cours
     console.log('[BOT] Connecté en tant que '+ BOT.user.tag);
+    BOT.user.setPresence({ game: { name: 'New-York City RP', type: 0, url:'https://www.twitch.tv/discordapp' } }); // jeu en cours
+    console.log('[BOT] En train de jouer à '+ BOT.user.presence.game.name);
     console.log('[BOT] Bot prêt!');
 });
 

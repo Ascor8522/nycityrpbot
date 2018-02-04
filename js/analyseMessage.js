@@ -17,6 +17,7 @@ module.exports = {
                 case "$bot":
                 case "$aide": if (entree.length==1) { toReturn = renvoyer([1,2,3,4,5,6,7,8],toReturn); } else { toReturn = renvoyer([0,1], toReturn); } break;
                 case "$jouer":
+                case "$joue":
                 case "$play":
                 case "$join": if (entree.length==1) { /* TODO Nouveau joueur */ toReturn = prochainement(); newPlayer.newPlayer(message); } else { toReturn = renvoyer([0,2], toReturn); } break;
                 case "$banque": //banque
