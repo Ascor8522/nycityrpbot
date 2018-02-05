@@ -1,4 +1,4 @@
-const backup = require("./backup.js");
+const save = require("./save.js");
 const loadData = require("./loadData");
 const paySalary = require("./paySalary.js");
 const joueurExiste = require('./joueurExiste.js');
@@ -17,7 +17,7 @@ module.exports = {
         console.log(JSON.stringify(data));
         data["joueurs"].push(newplayer);
         console.log(JSON.stringify(data));
-        backup.backup(data);
+        save.save(data);
         paySalary.paySalary(message.author.id);
         */
     }

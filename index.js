@@ -5,16 +5,17 @@ const FS = require('fs');
 
 const token = require('./js/token.js');
 const loadData = require('./js/loadData.js');
-const backup = require('./js/backup.js');
+const save = require('./js/save.js');
 const analyseMessage = require('./js/analyseMessage.js');
+const data = require('./js/data.js');
 
 process.stdout.write('\033c');
-
-loadData.loadData();
 
 console.log('[TOKEN] ' + token.token);
 BOT.login(token.token);
 console.log('[BOT] Le bot a démarré.');
+
+console.log(data.data);
 
 BOT.on('ready', () => {
     console.log('[BOT] Connecté en tant que '+ BOT.user.tag);

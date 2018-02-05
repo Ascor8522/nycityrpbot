@@ -1,4 +1,4 @@
-{
+module.exports.data = {
  "joueurs":[
   {"id":274241336490852353},
   {"id":123456789, "metier":"patron", "dateARecuSalaire":"04/01/2018", "banque":1250, "portefeuille":50, "inventaire":[], "dateInscription":"01/01/2018", "notification":[]},
@@ -20,4 +20,4 @@
  "magasin":[
   {"nom":"Boule de Noël", "prix":20, "quantiteRestante":100}
  ]
-}
+};
