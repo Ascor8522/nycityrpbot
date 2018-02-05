@@ -15,8 +15,6 @@ console.log('[TOKEN] ' + token.token);
 BOT.login(token.token);
 console.log('[BOT] Le bot a démarré.');
 
-console.log(data.data);
-
 BOT.on('ready', () => {
     console.log('[BOT] Connecté en tant que '+ BOT.user.tag);
     BOT.user.setPresence({ game: { name: 'New-York City RP', type: 0, url:'https://www.twitch.tv/discordapp' } }); // jeu en cours
@@ -27,7 +25,6 @@ BOT.on('ready', () => {
 BOT.on('message', message => {
     if (!message.author.bot) {  //le bot ne peut pas réagir aux messages des bots
         if(message.channel.id=="397785283548151808") {  //messages unqiement acceptés dans le channel de test
-            console.log("[MSG] Message reçu de " + message.author.username);
             let reponse = analyseMessage.analyseMessage(message);
             if (reponse != undefined && reponse!="") {  // répondre uniquement si réponse présente
                 message.reply(reponse);

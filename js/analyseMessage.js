@@ -1,16 +1,16 @@
 const clearChannel = require('./clearChannel.js');
 const newPlayer = require('./newPlayer.js');
-const loadData = require('./loadData.js');
 const metiers = require('./jobs.js');
 const commandes = require('./commands.js');
 
 module.exports = {
     analyseMessage: function (message) {
-		data2 = loadData.loadData();
         var entree = message.content.toLowerCase().split(" ");
 				for (var i =0;i<entree.length;i++) { entree[i] = entree[i].normalize('NFD').replace(/[\u0300-\u036f]/g, "")}
         var toReturn;
         if (entree[0].charAt(0)=="$") {
+            console.log("[MSG] Message reçu de " + message.author.username);
+            console.log("[MSG] Message : "+message.content);
             toReturn = "";
             switch (entree[0]) {
                 case "$help":
@@ -19,7 +19,7 @@ module.exports = {
                 case "$jouer":
                 case "$joue":
                 case "$play":
-                case "$join": if (entree.length==1) { /* TODO Nouveau joueur */ toReturn = prochainement(); newPlayer.newPlayer(message); } else { toReturn = renvoyer([0,2], toReturn); } break;
+                case "$join": if (entree.length==1) { /* TODO Nouveau joueur */ toReturn = prochainement(); toReturn = newPlayer.newPlayer(message); } else { toReturn = renvoyer([0,2], toReturn); } break;
                 case "$banque": //banque
                 case "$bank":
                     switch (entree[1]) {
@@ -83,7 +83,7 @@ module.exports = {
                         default: toReturn = renvoyer([0,8], toReturn);
                     } break;
                 case "$clear": if (entree.length==1) { toReturn = "**[ATTENTION] Cette commande est expérimentale et rique de ne pas fonctionner. A utiliser avec prudence donc.**"; clearChannel.clearChannel(message); } else { toReturn = renvoyer([0], toReturn); } break;
-                case "$data": if (entree.length==1) { toReturn = "**[ATTENTION] Cette commande est expérimentale et rique de ne pas fonctionner. A utiliser avec prudence donc.**\n" + JSON.stringify(data2); } else { toReturn = renvoyer([0], toReturn); } break;
+                case "$data": if (entree.length==1) { toReturn = "**[ATTENTION] Cette commande est expérimentale et rique de ne pas fonctionner. A utiliser avec prudence donc.**\n" + JSON.stringify(data); } else { toReturn = renvoyer([0], toReturn); } break;
                 case "$all":
                 case "$commandes":
                 case "$commands": if (entree.length==1) { all(message); } else { toReturn = renvoyer([0], toReturn); } break;
