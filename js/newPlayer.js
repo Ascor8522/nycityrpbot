@@ -29,5 +29,5 @@ function Player (message) {
 }
 
 function daySince1970() {
-    return Math.floor(Math.floor(Math.floor(Math.floor(d.getTime()/1000)/60)/60)/24); //Jours depuis le 10/01/1970
+    return Math.ceil(Math.round(Math.round(Math.round(d.getTime()/1000)/60)/60)/24); //Jours depuis le 10/01/1970
 }
