@@ -9,7 +9,7 @@ module.exports = {
             var newplayer = new Player(message);
             data.data["joueurs"].push(newplayer);
             console.log("[JOUEUR] Le compte du joueur "+message.author.id +" a bien été créé.");
-            //paySalary.paySalary(message.author.id);
+            paySalary.paySalary(message.author.id);
             return "Inscription réussie! bienvenue dans l'aventure";
         } else {
             return "Tu es déjà inscrit!";
