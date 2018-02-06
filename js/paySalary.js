@@ -5,7 +5,7 @@ var d = new Date;
 module.exports = {
     paySalary : function (id) {
         var cpt = trouveJoueur(id);
-        if (data.data.joueurs[cpt].dateARecuSalaire-daySince1970<=0) {
+        if (data.data.joueurs[cpt].dateARecuSalaire-daySince1970()<=0) {
             var paye = nombreAleatoire(data.data.metiers[trouveMetier(data.data.joueurs[cpt].metier)].salaireMin, data.data.metiers[trouveMetier(data.data.joueurs[cpt].metier)].salaireMax);
             data.data.joueurs[cpt].banque = data.data.joueurs[cpt].banque + paye;
             data.data.joueurs[cpt].dateARecuSalaire = daySince1970();
