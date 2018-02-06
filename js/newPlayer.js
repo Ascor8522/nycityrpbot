@@ -7,7 +7,7 @@ module.exports = {
         if(!(playerExists.playerExists(message.author.id))) {
             var newplayer = new Player(message);
             data.data["joueurs"].push(newplayer);
-            console.log("[JOUEUR] Le compte du joueur "+message.author.id +" a bien été créé.");
+            console.log(daySince1970.time()+" [JOUEUR] Le compte du joueur "+message.author.id +" a bien été créé.");
             return "Inscription réussie! bienvenue dans l'aventure";
         } else {
             return "Tu es déjà inscrit!";

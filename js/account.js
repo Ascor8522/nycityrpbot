@@ -2,6 +2,7 @@ const playerExists = require('./playerExists.js');
 const commands = require('./commands.js');
 const data = require('./data.js');
 const find = require('./find.js');
+const daySince1970 = require('./daySince1970.js');
 
 module.exports = {
     open:function(id) {
@@ -11,7 +12,7 @@ module.exports = {
             if (data.data.joueurs[cpt].banque=="ferme"||data.data.joueurs[cpt].banque=="cloture") {
                 data.data.joueurs[cpt].banque=0;
                 toReturn = "Votre compte a bien été ouvert.";
-                console.log("[BANQUE] "+id+" vient d'ouvrir son compte.");
+                console.log(daySince1970.time()+" [BANQUE] "+id+" vient d'ouvrir son compte.");
             } else {
                 toReturn = "Vous avez déjà un compte ouvert à votre nom.";
             }
@@ -28,7 +29,7 @@ module.exports = {
                 data.data.joueurs[cpt].portefeuille = data.data.joueurs[cpt].portefeuille + data.data.joueurs[cpt].banque;
                 data.data.joueurs[cpt].banque="cloture";
                 toReturn = "Votre compte a bien été ouvert.";
-                console.log("[BANQUE] "+id+" vient de cloturer son compte.");
+                console.log(daySince1970.time()+" [BANQUE] "+id+" vient de cloturer son compte.");
             } else {
                 toReturn = "Action impossible, soit vous n'avez jamais ouvert de compte, soit vous l'avez déjà cloturé.";
             }

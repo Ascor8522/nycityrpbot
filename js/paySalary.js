@@ -16,7 +16,7 @@ module.exports = {
                     data.data.joueurs[cpt].banque = data.data.joueurs[cpt].banque + paye;
                 }
                 data.data.joueurs[cpt].dateARecuSalaire = daySince1970.daySince1970();
-                console.log("[BANQUE] Le joueur "+id+" s'est vu versé la somme de "+paye+"€.");
+                console.log(daySince1970.time()+" [BANQUE] Le joueur "+id+" s'est vu versé la somme de "+paye+"€.");
             }
         }
     }

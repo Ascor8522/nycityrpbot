@@ -6,6 +6,7 @@ const paySalary = require('./paySalary.js');
 const save = require('./save.js');
 const data = require('./data.js');
 const account = require('./account.js');
+const daySince1970 = require('./daySince1970.js');
 
 module.exports = {
     analyseMessage: function (message) {
@@ -13,8 +14,8 @@ module.exports = {
 		for (var i =0;i<entree.length;i++) { entree[i] = entree[i].normalize('NFD').replace(/[\u0300-\u036f]/g, "")}
         var toReturn ="";
         if (entree[0].charAt(0)=="$") {
-            console.log("[MSG] Message reçu de " + message.author.username);
-            console.log("[MSG] Message : "+message.content);
+            console.log(daySince1970.time()+" [MSG] Message reçu de " + message.author.username);
+            console.log(daySince1970.time()+" [MSG] Message : "+message.content);
             paySalary.paySalary(message.author.id); //paye le joueur
             switch (entree[0]) {
                 case "$help":
