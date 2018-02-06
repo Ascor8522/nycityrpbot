@@ -1,4 +1,3 @@
-const paySalary = require("./paySalary.js");
 const playerExists = require('./playerExists.js');
 const data = require('./data.js');
 var d = new Date;
@@ -9,7 +8,6 @@ module.exports = {
             var newplayer = new Player(message);
             data.data["joueurs"].push(newplayer);
             console.log("[JOUEUR] Le compte du joueur "+message.author.id +" a bien été créé.");
-            paySalary.paySalary(message.author.id);
             return "Inscription réussie! bienvenue dans l'aventure";
         } else {
             return "Tu es déjà inscrit!";

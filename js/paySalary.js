@@ -10,7 +10,6 @@ module.exports = {
             data.data.joueurs[cpt].banque = data.data.joueurs[cpt].banque + paye;
             console.log("[BANQUE] Le joueur "+id+" s'est vu versé la somme de "+paye+"€.");
         }
-        save.save();
     }
 }
 
@@ -23,7 +22,6 @@ function trouveJoueur(id) {
     while(data.data.joueurs[cpt].id!=id) {
         cpt++;
     }
-    cpt--;
     return cpt;
 }
 
@@ -32,7 +30,6 @@ function trouveMetier(metier) {
     while(data.data.metiers[cpt].fonction!=metier) {
         cpt++;
     }
-    cpt--;
     return cpt;
 }
 
