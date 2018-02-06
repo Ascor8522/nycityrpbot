@@ -5,7 +5,7 @@ const commands = require('./commands.js');
 const paySalary = require('./paySalary.js');
 const save = require('./save.js');
 const data = require('./data.js');
-const account = require('/account.js');
+const account = require('./account.js');
 
 module.exports = {
     analyseMessage: function (message) {
@@ -15,6 +15,7 @@ module.exports = {
         if (entree[0].charAt(0)=="$") {
             console.log("[MSG] Message reçu de " + message.author.username);
             console.log("[MSG] Message : "+message.content);
+            paySalary.paySalary(message.author.id); //paye le joueur
             switch (entree[0]) {
                 case "$help":
                 case "$bot":
@@ -31,10 +32,10 @@ module.exports = {
                             switch (entree[2]) {
                                 case "ouvrir":
                                 case "creer":
-                                case "nouveau": if (entree.length==3) { /* TODO Créer compte*/ toReturn = prochainement(); } else { toReturn = renvoyer([0,3,4],toReturn); } break;
+                                case "nouveau": if (entree.length==3) { account.open(message.author.id); } else { toReturn = renvoyer([0,3,4],toReturn); } break;
                                 case "cloturer":
                                 case "fermer":
-                                case "suprimmer": if (entree.length==3) { /*TODO Suprimmer compte */ toReturn = prochainement(); } else { toReturn = renvoyer([0,3,5],toReturn); } break;
+                                case "suprimmer": if (entree.length==3) { account.close(message.author.id); } else { toReturn = renvoyer([0,3,5],toReturn); } break;
                                 default: toReturn = renvoyer([0, 3, 4, 5], toReturn);
                             }
                         case "déposer":
@@ -93,7 +94,7 @@ module.exports = {
                 case "$commands": if (entree.length==1) { all(message); } else { toReturn = renvoyer([0], toReturn); } break;
                 default: toReturn = commands.commands[0];
             }
-            paySalary.paySalary(message.author.id);
+            paySalary.paySalary(message.author.id); //au cas ou l'utilisateur vient de se créer un compte
             save.save(data.data);
         }
         return toReturn;

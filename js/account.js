@@ -4,7 +4,7 @@ const data = require('./data.js');
 const find = require('./find.js');
 
 module.exports = {
-    open : function(id) {
+    open:function(id) {
         var toReturn;
         if (playerExists.playerExists(id)) {
             var cpt = find.trouveJoueur(id);
@@ -20,11 +20,12 @@ module.exports = {
         }
         return toReturn;
     },
-    close : function(id) {
+    close:function(id) {
         var toReturn;
         if (playerExists.playerExists(id)) {
             var cpt = find.trouveJoueur(id);
             if (data.data.joueurs[cpt].banque!="ferme"||data.data.joueurs[cpt].banque!="cloture") {
+                data.data.joueurs[cpt].portefeuille = data.data.joueurs[cpt].portefeuille + data.data.joueurs[cpt].banque;
                 data.data.joueurs[cpt].banque="cloture";
                 toReturn = "Votre compte a bien été ouvert.";
                 console.log("[BANQUE] "+id+" vient de cloturer son compte.");
