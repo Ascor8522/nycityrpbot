@@ -2,16 +2,18 @@ const clearChannel = require('./clearChannel.js');
 const newPlayer = require('./newPlayer.js');
 const metiers = require('./jobs.js');
 const commandes = require('./commands.js');
+const paySalary = require('./paySalary.js');
+const save = require('./save.js');
+const data = require('./data.js');
 
 module.exports = {
     analyseMessage: function (message) {
         var entree = message.content.toLowerCase().split(" ");
 				for (var i =0;i<entree.length;i++) { entree[i] = entree[i].normalize('NFD').replace(/[\u0300-\u036f]/g, "")}
-        var toReturn;
+        var toReturn ="";
         if (entree[0].charAt(0)=="$") {
             console.log("[MSG] Message reçu de " + message.author.username);
             console.log("[MSG] Message : "+message.content);
-            toReturn = "";
             switch (entree[0]) {
                 case "$help":
                 case "$bot":
@@ -19,7 +21,7 @@ module.exports = {
                 case "$jouer":
                 case "$joue":
                 case "$play":
-                case "$join": if (entree.length==1) { /* TODO Nouveau joueur */ toReturn = prochainement(); toReturn = newPlayer.newPlayer(message); } else { toReturn = renvoyer([0,2], toReturn); } break;
+                case "$join": if (entree.length==1) { /* TODO Nouveau joueur */ toReturn = newPlayer.newPlayer(message); } else { toReturn = renvoyer([0,2], toReturn); } break;
                 case "$banque": //banque
                 case "$bank":
                     switch (entree[1]) {
@@ -89,6 +91,7 @@ module.exports = {
                 case "$commands": if (entree.length==1) { all(message); } else { toReturn = renvoyer([0], toReturn); } break;
                 default: toReturn = commandes.commandes[0];
             }
+            save.save(data.data);
         }
         return toReturn;
     }

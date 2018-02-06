@@ -7,11 +7,10 @@ module.exports = {
     newPlayer: function newPlayer(message) {
         if(!(playerExists.playerExists(message.author.id))) {
             var newplayer = new Player(message);
-            console.log(JSON.stringify(data.data));
             data.data["joueurs"].push(newplayer);
-            console.log(JSON.stringify(data.data));
-            //save.save(data.data);
+            console.log("[JOUEUR] Le compte du joueur "+message.author.id +" a bien été créé.");
             //paySalary.paySalary(message.author.id);
+            return "Inscription réussie! bienvenue dans l'aventure";
         } else {
             return "Tu es déjà inscrit!";
         }
@@ -23,7 +22,7 @@ module.exports = {
 function Player (message) {
     this.id = message.author.id;
     this.metier = "chomage";
-    this.dateARecuSalaire = ""
+    this.dateARecuSalaire = 0;
     this.banque = 0;
     this.portefeuille = 0;
     this.inventaire = [];
