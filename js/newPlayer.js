@@ -1,6 +1,6 @@
 const playerExists = require('./playerExists.js');
 const data = require('./data.js');
-var d = new Date;
+const daySince1970 = require('./daySince1970.js');
 
 module.exports = {
     newPlayer: function newPlayer(message) {
@@ -21,13 +21,9 @@ function Player (message) {
     this.id = message.author.id;
     this.metier = "chomage";
     this.dateARecuSalaire = 0;
-    this.banque = 0;
+    this.banque = "ferme";
     this.portefeuille = 0;
     this.inventaire = [];
-    this.dateInscription = daySince1970();
-    this.notification = [d.getDate()+"/"+d.getMonth()+"/"+d.getFullYear()+" "+d.getHours()+":"+d.getMinutes()+":"+d.getSeconds()+" : Félicitations, votre compte a bien été créé."];
-}
-
-function daySince1970() {
-    return Math.ceil(Math.round(Math.round(Math.round(d.getTime()/1000)/60)/60)/24); //Jours depuis le 10/01/1970
+    this.dateInscription = daySince1970.daySince1970();
+    this.notification = [daySince1970.dateDMYHMS()+" : Félicitations, votre compte a bien été créé."];
 }

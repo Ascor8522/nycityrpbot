@@ -1,4 +1,4 @@
-module.exports.commandes = [
+module.exports.commands = [
     /* 0  */"Commande inconnue. Tapez **$help** pour avoir le liste des commandes.",
     /* 1  */"\t**$help** \t Affiche la liste de toutes les commandes.",
     /* 2  */"\t**$jouer** \t Créé un profil pour jouer (indispensable).",

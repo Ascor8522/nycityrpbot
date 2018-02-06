@@ -1,15 +1,16 @@
 const clearChannel = require('./clearChannel.js');
 const newPlayer = require('./newPlayer.js');
 const metiers = require('./jobs.js');
-const commandes = require('./commands.js');
+const commands = require('./commands.js');
 const paySalary = require('./paySalary.js');
 const save = require('./save.js');
 const data = require('./data.js');
+const account = require('/account.js');
 
 module.exports = {
     analyseMessage: function (message) {
         var entree = message.content.toLowerCase().split(" ");
-				for (var i =0;i<entree.length;i++) { entree[i] = entree[i].normalize('NFD').replace(/[\u0300-\u036f]/g, "")}
+		for (var i =0;i<entree.length;i++) { entree[i] = entree[i].normalize('NFD').replace(/[\u0300-\u036f]/g, "")}
         var toReturn ="";
         if (entree[0].charAt(0)=="$") {
             console.log("[MSG] Message reçu de " + message.author.username);
@@ -21,7 +22,7 @@ module.exports = {
                 case "$jouer":
                 case "$joue":
                 case "$play":
-                case "$join": if (entree.length==1) { /* TODO Nouveau joueur */ toReturn = newPlayer.newPlayer(message); } else { toReturn = renvoyer([0,2], toReturn); } break;
+                case "$join": if (entree.length==1) { toReturn = newPlayer.newPlayer(message); } else { toReturn = renvoyer([0,2], toReturn); } break;
                 case "$banque": //banque
                 case "$bank":
                     switch (entree[1]) {
@@ -88,9 +89,9 @@ module.exports = {
                 case "$debug":
                 case "$data": if (entree.length==1) { toReturn = "**[ATTENTION] Cette commande est expérimentale et rique de ne pas fonctionner. A utiliser avec prudence donc.**\n" + JSON.stringify(data.data); } else { toReturn = renvoyer([0], toReturn); } break;
                 case "$all":
-                case "$commandes":
+                case "$commands":
                 case "$commands": if (entree.length==1) { all(message); } else { toReturn = renvoyer([0], toReturn); } break;
-                default: toReturn = commandes.commandes[0];
+                default: toReturn = commands.commands[0];
             }
             paySalary.paySalary(message.author.id);
             save.save(data.data);
@@ -115,8 +116,8 @@ function all(message) {
 function renvoyer (tab, toReturn) {
     toReturn = "\n" + toReturn;
     for(var i=0;i<tab.length-1;i++) {
-        toReturn = toReturn+ commandes.commandes[tab[i]] + "\n";
+        toReturn = toReturn+ commands.commands[tab[i]] + "\n";
     }
-    toReturn = toReturn + commandes.commandes[tab[tab.length-1]];
+    toReturn = toReturn + commands.commands[tab[tab.length-1]];
     return toReturn;
 }

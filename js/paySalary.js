@@ -1,37 +1,23 @@
 const data = require('./data.js');
 const save = require('./save.js');
+const daySince1970 = require('./daySince1970.js');
+const find = require('./find.js');
 var d = new Date;
 
 module.exports = {
     paySalary : function (id) {
-        var cpt = trouveJoueur(id);
-        if (data.data.joueurs[cpt].dateARecuSalaire-daySince1970()<=0) {
-            var paye = nombreAleatoire(data.data.metiers[trouveMetier(data.data.joueurs[cpt].metier)].salaireMin, data.data.metiers[trouveMetier(data.data.joueurs[cpt].metier)].salaireMax);
-            data.data.joueurs[cpt].banque = data.data.joueurs[cpt].banque + paye;
-            data.data.joueurs[cpt].dateARecuSalaire = daySince1970();
+        var cpt = find.trouveJoueur(id);
+        if (data.data.joueurs[cpt].dateARecuSalaire - daySince1970.daySince1970() <= 0) {
+            var paye = nombreAleatoire(data.data.metiers[find.trouveMetier(data.data.joueurs[cpt].metier)].salaireMin, data.data.metiers[find.trouveMetier(data.data.joueurs[cpt].metier)].salaireMax);
+            if (data.data.joueurs[cpt].banque=="ferme"||data.data.joueurs[cpt].banque=="cloture") {
+                data.data.joueurs[cpt].portefeuille = data.data.joueurs[cpt].portefeuille + paye;
+            } else {
+                data.data.joueurs[cpt].banque = data.data.joueurs[cpt].banque + paye;
+            }
+            data.data.joueurs[cpt].dateARecuSalaire = daySince1970.daySince1970();
             console.log("[BANQUE] Le joueur "+id+" s'est vu versé la somme de "+paye+"€.");
         }
     }
-}
-
-function daySince1970() {
-    return Math.ceil(Math.round(Math.round(Math.round(d.getTime()/1000)/60)/60)/24); //Jours depuis le 10/01/1970
-}
-
-function trouveJoueur(id) {
-    var cpt = 0;
-    while(data.data.joueurs[cpt].id!=id) {
-        cpt++;
-    }
-    return cpt;
-}
-
-function trouveMetier(metier) {
-    var cpt = 0;
-    while(data.data.metiers[cpt].fonction!=metier) {
-        cpt++;
-    }
-    return cpt;
 }
 
 function nombreAleatoire(min, max) {
