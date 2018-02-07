@@ -12,7 +12,7 @@ module.exports = {
             }
         }
         if (!existe) {
-            console.log(daySince1970.time()+" [JOUEUR] Ce joueur n'existait pas encore.\n\tId : "+id);
+            console.log(daySince1970.time()+" [JOUEUR] Ce joueur n'est pas encore.\n\tId : "+id);
         }
     return existe;
     }
