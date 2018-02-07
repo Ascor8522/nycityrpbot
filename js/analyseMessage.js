@@ -101,7 +101,7 @@ module.exports = {
                 case "$commands": if (entree.length==1) { all(message); } else { toReturn = renvoyer([0], toReturn); } break;
                 default: toReturn = commands.commands[0];
             }
-            data.data;
+            save.save(data.data);
         }
         return toReturn;
     }
