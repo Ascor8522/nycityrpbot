@@ -36,13 +36,13 @@ module.exports = {
                                 case "creer":
                                 case "open":
                                 case "new":
-                                case "nouveau": if (entree.length==3) { account.open(message.author.id); } else { toReturn = renvoyer([0,3,4],toReturn); } break;
+                                case "nouveau": if (entree.length==3) { toReturn = account.open(message.author.id); } else { toReturn = renvoyer([0,3,4],toReturn); } break;
                                 case "cloturer":
                                 case "fermer":
                                 case "close":
                                 case "delete":
                                 case "del":
-                                case "suprimmer": if (entree.length==3) { account.close(message.author.id); } else { toReturn = renvoyer([0,3,5],toReturn); } break;
+                                case "suprimmer": if (entree.length==3) { toReturn = account.close(message.author.id); } else { toReturn = renvoyer([0,3,5],toReturn); } break;
                                 default: toReturn = renvoyer([0, 3, 4, 5], toReturn);
                             }
                         case "déposer":
