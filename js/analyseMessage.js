@@ -15,7 +15,7 @@ module.exports = {
         var toReturn ="";
         if (entree[0].charAt(0)=="$") {
             console.log(daySince1970.time()+" [MSG] Message reçu de " + message.author.username);
-            console.log(daySince1970.time()+" [MSG] Message : "+message.content);
+            console.log("\t [MSG] Message : "+message.content);
             paySalary.paySalary(message.author.id); //paye le joueur
             switch (entree[0]) {
                 case "$help":
@@ -36,15 +36,15 @@ module.exports = {
                                 case "creer":
                                 case "open":
                                 case "new":
-                                case "nouveau": if (entree.length==3) { account.open(message.author.id); } else { toReturn = renvoyer([0,3,4],toReturn); } break;
+                                case "nouveau": if (entree.length==3) { toReturn = account.open(message.author.id); } else { toReturn = renvoyer([0,3,4],toReturn); } break;
                                 case "cloturer":
                                 case "fermer":
                                 case "close":
                                 case "delete":
                                 case "del":
-                                case "suprimmer": if (entree.length==3) { account.close(message.author.id); } else { toReturn = renvoyer([0,3,5],toReturn); } break;
+                                case "suprimmer": if (entree.length==3) { toReturn = account.close(message.author.id); } else { toReturn = renvoyer([0,3,5],toReturn); } break;
                                 default: toReturn = renvoyer([0, 3, 4, 5], toReturn);
-                            }
+                            } break;
                         case "déposer":
                         case "ajouter": if (entree.length==3) { /* TODO Déposer banque*/ toReturn = prochainement(); } else { toReturn = renvoyer([0,3,6], toReturn); } break;
                         case "retrait":
@@ -58,7 +58,7 @@ module.exports = {
                         case "help": if (entree.length==2) { toReturn = renvoyer([10,11], toReturn); } else { toReturn = renvoyer([0,9], toReturn); } break;
                         case "stock": if (entree.length==2) { /* TODO Voir les stocks */ toReturn = prochainement(); } else { toReturn = renvoyer([0,9,10], toReturn); } break;
                         case "acheter": if (entree.length==4) { /* TODO Acheter magasin */ toReturn = prochainement(); } else { toReturn = renvoyer([0,9,11], toReturn); } break;
-                            default: toReturn = renvoyer([0,9], toReturn);
+                        default: toReturn = renvoyer([0,9], toReturn);
                     } break;
                 case "$metier": //métier
                 case "$job":
@@ -101,8 +101,7 @@ module.exports = {
                 case "$commands": if (entree.length==1) { all(message); } else { toReturn = renvoyer([0], toReturn); } break;
                 default: toReturn = commands.commands[0];
             }
-            paySalary.paySalary(message.author.id); //au cas ou l'utilisateur vient de se créer un compte
-            save.save(data.data);
+            data.data;
         }
         return toReturn;
     }
