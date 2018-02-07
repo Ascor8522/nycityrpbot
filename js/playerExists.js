@@ -7,12 +7,14 @@ module.exports = {
         for (var prop in data.data.joueurs) {
             if(data.data.joueurs[prop].id==id) {
                 existe=true;
-                console.log(daySince1970.time()+" [JOUEUR] Ce joueur existe déjà.\n\tId : "+id);
+                console.log(daySince1970.time()+" [JOUEUR] Ce joueur existe déjà.");
+                console.log("\t Id : "+id);
                 break;
             }
         }
         if (!existe) {
-            console.log(daySince1970.time()+" [JOUEUR] Ce joueur n'est pas encore.\n\tId : "+id);
+            console.log(daySince1970.time()+" [JOUEUR] Ce joueur n'est pas encore.");
+            console.log("\t Id : "+id);
         }
     return existe;
     }
