@@ -45,10 +45,10 @@ module.exports = {
                                 case "suprimmer": if (entree.length==3) { toReturn = account.close(message.author.id); } else { toReturn = renvoyer([0,3,5],toReturn); } break;
                                 default: toReturn = renvoyer([0, 3, 4, 5], toReturn);
                             } break;
-                        case "déposer":
-                        case "ajouter": if (entree.length==3) { /* TODO Déposer banque*/ toReturn = prochainement(); } else { toReturn = renvoyer([0,3,6], toReturn); } break;
+                        case "deposer":
+                        case "ajouter": if (entree.length==3) { toReturn = account.deposit(message.author.id, entree[2]); } else { toReturn = renvoyer([0,3,6], toReturn); } break;
                         case "retrait":
-                        case "retirer": if (entree.length==3) { /* TODO Retirer banque*/ toReturn = prochainement(); } else { toReturn = renvoyer([0,3,7], toReturn); } break;
+                        case "retirer": if (entree.length==3) { toReturn = account.withdraw(message.author.id, entree[2]); } else { toReturn = renvoyer([0,3,7], toReturn); } break;
                         default: toReturn = renvoyer([0,3], toReturn);
                     } break;
                 case "$magasin": //magasin
