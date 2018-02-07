@@ -7,6 +7,7 @@ const save = require('./save.js');
 const data = require('./data.js');
 const account = require('./account.js');
 const daySince1970 = require('./daySince1970.js');
+const shop = require('./shop.js');
 
 module.exports = {
     analyseMessage: function (message) {
@@ -25,7 +26,7 @@ module.exports = {
                 case "$joue":
                 case "$play":
                 case "$join": if (entree.length==1) { toReturn = newPlayer.newPlayer(message); } else { toReturn = renvoyer([0,2], toReturn); } break;
-                case "$banque": //banque
+                case "$banque":
                 case "$bank":
                     switch (entree[1]) {
                         case "help": if (entree.length==2) { toReturn = renvoyer([4,5,6,7,8], toReturn); } else { toReturn = renvoyer([0,3], toReturn); } break;
@@ -46,21 +47,42 @@ module.exports = {
                                 default: toReturn = renvoyer([0, 3, 4, 5], toReturn);
                             } break;
                         case "deposer":
+                        case "depose":
+                        case "depot":
                         case "ajouter": if (entree.length==3) { toReturn = account.deposit(message.author.id, entree[2]); } else { toReturn = renvoyer([0,3,6], toReturn); } break;
                         case "retrait":
+                        case "retire":
                         case "retirer": if (entree.length==3) { toReturn = account.withdraw(message.author.id, entree[2]); } else { toReturn = renvoyer([0,3,7], toReturn); } break;
+                        case "braquer":
+                        case "holdup":
+                        case "hold-up":
+                        case "casse": break;
+                        case "verser":
+                        case "virement":
+                        case "cheque":
+                        case "payer":
+                        case "donner": break;
+                        case "consulter":
+                        case "voir": break;
                         default: toReturn = renvoyer([0,3], toReturn);
                     } break;
-                case "$magasin": //magasin
+                case "$magasin":
                 case "$shop":
                 case "$boutique":
                     switch (entree[1]) {
                         case "help": if (entree.length==2) { toReturn = renvoyer([10,11], toReturn); } else { toReturn = renvoyer([0,9], toReturn); } break;
-                        case "stock": if (entree.length==2) { /* TODO Voir les stocks */ toReturn = prochainement(); } else { toReturn = renvoyer([0,9,10], toReturn); } break;
+                        case "browse":
+                        case "stock": if (entree.length==2) { toReturn = shop.stock(); } else { toReturn = renvoyer([0,9,10], toReturn); } break;
                         case "acheter": if (entree.length==4) { /* TODO Acheter magasin */ toReturn = prochainement(); } else { toReturn = renvoyer([0,9,11], toReturn); } break;
+                        case "retirer":
+                        case "enlever":
+                        case "delete":
+                        case "remove": /* TODO retirer un item/ tout du shop*/ break;
+                        case "ajouter":
+                        case "add": break;
                         default: toReturn = renvoyer([0,9], toReturn);
                     } break;
-                case "$metier": //métier
+                case "$metier":
                 case "$job":
                     switch (entree[1]) {
                         case "help": if (entree.length==2) { toReturn = renvoyer([13,14,15], toReturn); } else { toReturn = renvoyer([0,12], toReturn); } break;
@@ -69,7 +91,7 @@ module.exports = {
                         case "quitter": if (entree.length==3) { /* TODO Quitter metier */ toReturn = prochainement(); } else { toReturn = renvoyer([0,12,15], toReturn); } break;
                         default: toReturn = renvoyer([0,12], toReturn);
                     } break;
-                case "$inventaire": //inventaire
+                case "$inventaire":
                     switch (entree[1]) {
                         case "help": if (entree.length==2) { toReturn = renvoyer([17,18], toReturn); } else { toReturn = renvoyer([0,16], toReturn); } break;
                         case "ouvrir": if (entree.length==2) { /* TODO Ouvrir inventaire */ toReturn = prochainement(); } else { toReturn = renvoyer([0,16,17], toReturn); } break;
@@ -81,16 +103,19 @@ module.exports = {
                             toReturn = renvoyer([20], toReturn);
                         } else { /* TODO Payer joueur */ toReturn = prochainement(); }
                     } else { toReturn = renvoyer([0,19], toReturn); } break;
-                case "$entreprise": //entreprise
+                case "$entreprise":
                 case "$societe":
                 case "$boite":
                 case "$firme":
+                case "company":
                     switch (entree[1]) {
                         case "help": if (entree.length==2) { toReturn = renvoyer([22,23,24,25], toReturn); } else { toReturn = renvoyer([0,21], toReturn); } break;
                         case "liste": if (entree.length==2) { /* TODO Liste entreprises */ toReturn = prochainement(); } else { toReturn = renvoyer([0,21,22], toReturn); } break;
                         case "postuler": if (entree.length==3) { /* TODO Postuler entreprise */ toReturn = prochainement(); } else { toReturn = renvoyer([0,21,23], toReturn); } break;
                         case "virer": if (entree.length==4) { /* TODO Virer entreprise */ toReturn = prochainement(); } else { toReturn = renvoyer([0,21,24], toReturn); } break;
                         case "employes": if (entree.length==3) { /* TODO Liste employés */ toReturn = prochainement(); } else { toReturn = renvoyer([0,21,25], toReturn); } break;
+                        case "renomer":
+                        case "rename": break;
                         default: toReturn = renvoyer([0,21], toReturn);
                     } break;
                 case "$clear": if (entree.length==1) { toReturn = "**[ATTENTION] Cette commande est expérimentale et rique de ne pas fonctionner. A utiliser avec prudence donc.**"; clearChannel.clearChannel(message); } else { toReturn = renvoyer([0], toReturn); } break;

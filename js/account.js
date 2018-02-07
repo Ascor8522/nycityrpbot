@@ -45,7 +45,9 @@ module.exports = {
         if (playerExists.playerExists(id)) {
             var cpt = find.trouveJoueur(id);
             if (data.data.joueurs[cpt].banque!="ferme"&&data.data.joueurs[cpt].banque!="cloture") {
-                if (Number.isInteger(montant)) {
+                console.log(montant);
+                montant = parseInt(montant);
+                if (Number.isInteger(montant)&&montant>0) {
                     if (data.data.joueurs[cpt].portefeuille>=montant) {
                         data.data.joueurs[cpt].portefeuille = data.data.joueurs[cpt].portefeuille - montant;
                         data.data.joueurs[cpt].banque = data.data.joueurs[cpt].banque + montant;
@@ -55,7 +57,7 @@ module.exports = {
                         toReturn = "Vous ne pouvez pas déposer ce montant, vous n'avez pas assez d'argent.";
                     }
                 } else {
-                    toReturn = "Le montant n'est pas vale. Veillez à ce que ce soit un **nombre entier**.";
+                    toReturn = "Le montant n'est pas vale. Veillez à ce que ce soit un **nombre entier positif**.";
                 }
             } else {
                 toReturn = "Action impossible, soit vous n'avez jamais ouvert de compte, soit vous l'avez cloturé.";
@@ -72,6 +74,7 @@ module.exports = {
             var cpt = find.trouveJoueur(id);
             if (data.data.joueurs[cpt].banque!="ferme"&&data.data.joueurs[cpt].banque!="cloture") {
                 console.log(montant);
+                montant = parseInt(montant);
                 if (Number.isInteger(montant)&&montant>=0) {
                     if (data.data.joueurs[cpt].banque>=montant) {
                         data.data.joueurs[cpt].banque = data.data.joueurs[cpt].banque - montant;

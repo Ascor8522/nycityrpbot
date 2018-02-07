@@ -3,7 +3,7 @@ var d = new Date;
 module.exports = {
     daySince1970:function() {
         d = new Date;
-        return Math.ceil(Math.ceil(Math.ceil(Math.ceil(d.getTime()/1000)/60)/60)/24)-1; //Jours depuis le 10/01/1970
+        return Math.ceil(Math.ceil(Math.ceil(Math.ceil(d.getTime()/1000)/60)/60)/24); //Jours depuis le 10/01/1970
     },
 
     dateDMYHMS:function() {
