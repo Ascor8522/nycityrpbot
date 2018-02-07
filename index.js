@@ -8,18 +8,19 @@ const loadData = require('./js/loadData.js');
 const save = require('./js/save.js');
 const analyseMessage = require('./js/analyseMessage.js');
 const data = require('./js/data.js');
+const daySince1970 = require('./js/daySince1970.js');
 
 process.stdout.write('\033c');
 
-console.log('[TOKEN] ' + token.token);
+console.log(daySince1970.time()+" [TOKEN] " + token.token);
 BOT.login(token.token);
-console.log('[BOT] Le bot a démarré.');
+console.log(daySince1970.time()+" [BOT] Le bot a démarré.");
 
 BOT.on('ready', () => {
-    console.log('[BOT] Connecté en tant que '+ BOT.user.tag);
+    console.log(daySince1970.time()+" [BOT] Connecté en tant que "+ BOT.user.tag);
     BOT.user.setPresence({ game: { name: 'New-York City RP', type: 0, url:'https://www.twitch.tv/discordapp' } }); // jeu en cours
-    console.log('[BOT] En train de jouer à '+ BOT.user.presence.game.name);
-    console.log('[BOT] Bot prêt!');
+    console.log(daySince1970.time()+" [BOT] En train de jouer à "+ BOT.user.presence.game.name);
+    console.log(daySince1970.time()+" [BOT] Bot prêt!");
 });
 
 BOT.on('message', message => {

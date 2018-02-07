@@ -30,12 +30,18 @@ module.exports = {
                     switch (entree[1]) {
                         case "help": if (entree.length==2) { toReturn = renvoyer([4,5,6,7,8], toReturn); } else { toReturn = renvoyer([0,3], toReturn); } break;
                         case "compte":
+                        case "account":
                             switch (entree[2]) {
                                 case "ouvrir":
                                 case "creer":
+                                case "open":
+                                case "new":
                                 case "nouveau": if (entree.length==3) { account.open(message.author.id); } else { toReturn = renvoyer([0,3,4],toReturn); } break;
                                 case "cloturer":
                                 case "fermer":
+                                case "close":
+                                case "delete":
+                                case "del":
                                 case "suprimmer": if (entree.length==3) { account.close(message.author.id); } else { toReturn = renvoyer([0,3,5],toReturn); } break;
                                 default: toReturn = renvoyer([0, 3, 4, 5], toReturn);
                             }
