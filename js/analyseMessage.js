@@ -44,6 +44,8 @@ module.exports = {
                                 case "delete":
                                 case "del":
                                 case "suprimmer": if (entree.length==3) { toReturn = account.close(message.author.id); } else { toReturn = renvoyer([0,3,5],toReturn); } break;
+                                case "consulter":
+                                case "voir": break;
                                 default: toReturn = renvoyer([0, 3, 4, 5], toReturn);
                             } break;
                         case "deposer":
@@ -62,8 +64,6 @@ module.exports = {
                         case "cheque":
                         case "payer":
                         case "donner": break;
-                        case "consulter":
-                        case "voir": break;
                         default: toReturn = renvoyer([0,3], toReturn);
                     } break;
                 case "$magasin":
@@ -73,11 +73,13 @@ module.exports = {
                         case "help": if (entree.length==2) { toReturn = renvoyer([10,11], toReturn); } else { toReturn = renvoyer([0,9], toReturn); } break;
                         case "browse":
                         case "stock": if (entree.length==2) { toReturn = shop.stock(); } else { toReturn = renvoyer([0,9,10], toReturn); } break;
-                        case "acheter": if (entree.length==4) { /* TODO Acheter magasin */ toReturn = prochainement(); } else { toReturn = renvoyer([0,9,11], toReturn); } break;
+                        case "acheter":
+                        case "buy":
+                        case "prendre": if (entree.length==4) { /* TODO Acheter magasin */ toReturn = prochainement(); } else { toReturn = renvoyer([0,9,11], toReturn); } break;
                         case "retirer":
                         case "enlever":
                         case "delete":
-                        case "remove": /* TODO retirer un item/ tout du shop*/ break;
+                        case "remove": break; /* TODO retirer un item/ tout du shop*/
                         case "ajouter":
                         case "add": break;
                         default: toReturn = renvoyer([0,9], toReturn);
@@ -94,7 +96,13 @@ module.exports = {
                 case "$inventaire":
                     switch (entree[1]) {
                         case "help": if (entree.length==2) { toReturn = renvoyer([17,18], toReturn); } else { toReturn = renvoyer([0,16], toReturn); } break;
-                        case "ouvrir": if (entree.length==2) { /* TODO Ouvrir inventaire */ toReturn = prochainement(); } else { toReturn = renvoyer([0,16,17], toReturn); } break;
+                        case "ouvrir":
+                        case "consulter":
+                        case "voir":
+                        case "open": if (entree.length==2) { /* TODO Ouvrir inventaire */ toReturn = prochainement(); } else { toReturn = renvoyer([0,16,17], toReturn); } break;
+                        case "jeter":
+                        case "suprimmer":
+                        case "delete": break;
                         default: toReturn = renvoyer([0,16], toReturn);
                     } break;
                 case "$payer":

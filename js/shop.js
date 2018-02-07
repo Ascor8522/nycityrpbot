@@ -14,5 +14,10 @@ module.exports= {
             toReturn = "La boutique est vide.\nElle sera prochainement réaprovisionnée.";
         }
         return toReturn;
+    },
+
+    buy:function(id, obj, qte) {
+        var toReturn;
+        return toReturn;
     }
 }

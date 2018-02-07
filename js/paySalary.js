@@ -8,10 +8,6 @@ module.exports = {
     paySalary : function (id) {
         if (playerExists.playerExists(id)) {
             var cpt = find.trouveJoueur(id);
-            console.log(cpt);
-            console.log(data.data.joueurs[cpt].dateARecuSalaire);
-            console.log(daySince1970.daySince1970());
-            console.log(data.data.joueurs[cpt].dateARecuSalaire - daySince1970.daySince1970() < 0);
             if (data.data.joueurs[cpt].dateARecuSalaire - daySince1970.daySince1970() < 0) {
                 var paye = nombreAleatoire(data.data.metiers[find.trouveMetier(data.data.joueurs[cpt].metier)].salaireMin, data.data.metiers[find.trouveMetier(data.data.joueurs[cpt].metier)].salaireMax);
                 if (data.data.joueurs[cpt].banque=="ferme"||data.data.joueurs[cpt].banque=="cloture") {
