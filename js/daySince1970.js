@@ -31,6 +31,6 @@ module.exports = {
         if (min<10) { min = "0"+min;}
         var sec = d.getSeconds()
         if (sec<10) { sec = "0"+sec;}
-        return (heure+":"+min+":"+sec);
+        return ("["+heure+":"+min+":"+sec+"]");
     }
 }

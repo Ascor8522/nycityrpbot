@@ -2,13 +2,14 @@ const exists = require('./exists.js');
 const commands = require('./commands.js');
 const data = require('./data.js');
 const find = require('./find.js');
+const daySince1970 = require('./daySince1970.js');
 
 module.exports= {
     stock:function (){
         var toReturn = "Voici le contenu de la boutique:\n";
         if (data.data.magasin.length>0) {
             for (var cpt in data.data.magasin) {
-                toReturn = toReturn +(Number.parseIntcpt(cpt)+1)+". "+data.data.magasin[cpt].quantiteRestante+"x "+data.data.magasin[cpt].nom+" à "+data.data.magasin[cpt].prix+"€\n";
+                toReturn = toReturn +(Number.parseInt(cpt)+1)+". "+data.data.magasin[cpt].quantiteRestante+"x "+data.data.magasin[cpt].nom+" à "+data.data.magasin[cpt].prix+"€\n";
             }
         } else {
             toReturn = "La boutique est vide.\nElle sera prochainement réaprovisionnée.";
@@ -31,24 +32,41 @@ module.exports= {
                                 data.data.joueurs[player].portefeuille = data.data.joueurs[player].portefeuille - (qte_demandee*data.data.magasin[obj_place].prix);
                                 data.data.joueurs[player].inventaire.push({nom:data.data.magasin[obj_place].nom, quantite:qte_demandee});
                                 toReturn = "Vous venez d'acheter "+qte_demandee+"x "+data.data.magasin[obj_place].nom;
+                                console.log(" [BOUTIQUE] "+player_id+"a acheté "+qte_demandee+"x "+data.data.magasin[obj_place].nom);
+                                if (data.data.magasin[obj_place].quantiteRestante==0) {
+                                    retirer(obj_place);
+                                }
                             } else {
                                 toReturn = "Vous n'avez pas assez d'argent pour acheter cet objet.";
+                                console.log(" [BOUTIQUE] "+player_id+"n'a pas assez d'argent pour acheter"+qte_demandee+"x "+data.data.magasin[obj_place].nom);
                             }
                         } else {
                             toReturn = "Il ne reste pas assez d'exmplaires.\nIl n'y a que "+data.data.magasin[obj_place].quantiteRestante+" "+data.data.magasin[obj_place].nom+" alors que vous en demandez "+qte_demandee;
+                            console.log(" [BOUTIQUE] + Pas assez d'exemplaires de "+data.data.magasin[obj_place].nom+" pour "+player_id);
                         }
                     } else {
                         toReturn = "Votre inventiare est plein, jeter des objets de votre inventaire pour pouvoir acheter cet objet.\n"+commands.commands[18];
+                        console.log(" [BOUTIQUE] Inventaire de "+player_id+" plein.");
                     }
                 } else {
                     toReturn = "Quantité demandée invalide.";
+                    console.log(" [BOUTIQUE] Quantité invalide: "+qte_demandee);
                 }
             } else {
                 toReturn = "Objet non trouvé, avez-vous entré son numéro ou son nom correctement?\n"+commands.commands[11]+"\n"+commands.commands[10];
+                console.log(" [BOUTIQUE] Objet "+obj+" non trouvé.");
             }
         } else {
             toReturn = "Vous devez être inscrit pour pouvoir acheter des objets dans la boutique.";
+            console.log(" [BOUTIQUE] "+player_id+" n'est pas inscrit.");
         }
         return toReturn;
     }
+}
+
+function retirer(place) {
+    console.log(" [BOUTIQUE] Objet "+data.data.magasin[place].nom+" retiré du shop car il n'y en a plus.");
+    /* TODO suprimmer élément du magasin*/
+    var magasin = data.data.magasin;
+
 }
