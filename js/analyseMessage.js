@@ -5,7 +5,7 @@ const commands = require('./commands.js');
 const paySalary = require('./paySalary.js');
 const save = require('./save.js');
 const data = require('./data.js');
-const account = require('./account.js');
+const bank = require('./bank.js');
 const daySince1970 = require('./daySince1970.js');
 const shop = require('./shop.js');
 
@@ -37,13 +37,13 @@ module.exports = {
                                 case "creer":
                                 case "open":
                                 case "new":
-                                case "nouveau": if (entree.length==3) { toReturn = account.open(message.author.id); } else { toReturn = renvoyer([0,3,4],toReturn); } break;
+                                case "nouveau": if (entree.length==3) { toReturn = bank.open(message.author.id); } else { toReturn = renvoyer([0,3,4],toReturn); } break;
                                 case "cloturer":
                                 case "fermer":
                                 case "close":
                                 case "delete":
                                 case "del":
-                                case "suprimmer": if (entree.length==3) { toReturn = account.close(message.author.id); } else { toReturn = renvoyer([0,3,5],toReturn); } break;
+                                case "suprimmer": if (entree.length==3) { toReturn = bank.close(message.author.id); } else { toReturn = renvoyer([0,3,5],toReturn); } break;
                                 case "consulter":
                                 case "voir": break;
                                 default: toReturn = renvoyer([0, 3, 4, 5], toReturn);
@@ -51,10 +51,10 @@ module.exports = {
                         case "deposer":
                         case "depose":
                         case "depot":
-                        case "ajouter": if (entree.length==3) { toReturn = account.deposit(message.author.id, entree[2]); } else { toReturn = renvoyer([0,3,6], toReturn); } break;
+                        case "ajouter": if (entree.length==3) { toReturn = bank.deposit(message.author.id, entree[2]); } else { toReturn = renvoyer([0,3,6], toReturn); } break;
                         case "retrait":
                         case "retire":
-                        case "retirer": if (entree.length==3) { toReturn = account.withdraw(message.author.id, entree[2]); } else { toReturn = renvoyer([0,3,7], toReturn); } break;
+                        case "retirer": if (entree.length==3) { toReturn = bank.withdraw(message.author.id, entree[2]); } else { toReturn = renvoyer([0,3,7], toReturn); } break;
                         case "braquer":
                         case "holdup":
                         case "hold-up":
@@ -75,7 +75,7 @@ module.exports = {
                         case "stock": if (entree.length==2) { toReturn = shop.stock(); } else { toReturn = renvoyer([0,9,10], toReturn); } break;
                         case "acheter":
                         case "buy":
-                        case "prendre": if (entree.length==4) { /* TODO Acheter magasin */ toReturn = prochainement(); } else { toReturn = renvoyer([0,9,11], toReturn); } break;
+                        case "prendre": if (entree.length==4) { toReturn = shop.buy(message.author.id, entree[2], entree[3]); } else { toReturn = renvoyer([0,9,11], toReturn); } break;
                         case "retirer":
                         case "enlever":
                         case "delete":

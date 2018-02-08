@@ -1,4 +1,4 @@
-const playerExists = require('./playerExists.js');
+const exists = require('./exists.js');
 const commands = require('./commands.js');
 const data = require('./data.js');
 const find = require('./find.js');
@@ -7,7 +7,7 @@ const daySince1970 = require('./daySince1970.js');
 module.exports = {
     open:function(id) {
         var toReturn;
-        if (playerExists.playerExists(id)) {
+        if (exists.playerExists(id)) {
             var cpt = find.trouveJoueur(id);
             if (data.data.joueurs[cpt].banque=="ferme"||data.data.joueurs[cpt].banque=="cloture") {
                 data.data.joueurs[cpt].banque=0;
@@ -24,7 +24,7 @@ module.exports = {
 
     close:function(id) {
         var toReturn;
-        if (playerExists.playerExists(id)) {
+        if (exists.playerExists(id)) {
             var cpt = find.trouveJoueur(id);
             if (data.data.joueurs[cpt].banque!="ferme"||data.data.joueurs[cpt].banque!="cloture") {
                 data.data.joueurs[cpt].portefeuille = data.data.joueurs[cpt].portefeuille + data.data.joueurs[cpt].banque;
@@ -42,7 +42,7 @@ module.exports = {
 
     deposit:function(id, montant) {
         var toReturn;
-        if (playerExists.playerExists(id)) {
+        if (exists.playerExists(id)) {
             var cpt = find.trouveJoueur(id);
             if (data.data.joueurs[cpt].banque!="ferme"&&data.data.joueurs[cpt].banque!="cloture") {
                 console.log(montant);
@@ -70,7 +70,7 @@ module.exports = {
 
     withdraw:function(id, montant) {
         var toReturn;
-        if (playerExists.playerExists(id)) {
+        if (exists.playerExists(id)) {
             var cpt = find.trouveJoueur(id);
             if (data.data.joueurs[cpt].banque!="ferme"&&data.data.joueurs[cpt].banque!="cloture") {
                 console.log(montant);

@@ -1,10 +1,10 @@
-const playerExists = require('./playerExists.js');
+const eists = require('./exists.js');
 const data = require('./data.js');
 const daySince1970 = require('./daySince1970.js');
 
 module.exports = {
     newPlayer: function newPlayer(message) {
-        if(!(playerExists.playerExists(message.author.id))) {
+        if(!(exists.playerExists(message.author.id))) {
             var newplayer = new Player(message);
             data.data["joueurs"].push(newplayer);
             console.log(daySince1970.time()+" [JOUEUR] Le compte du joueur "+message.author.id +" a bien été créé.");

@@ -2,11 +2,11 @@ const data = require('./data.js');
 const save = require('./save.js');
 const daySince1970 = require('./daySince1970.js');
 const find = require('./find.js');
-const playerExists = require('./playerExists.js');
+const exists = require('./exists.js');
 
 module.exports = {
     paySalary : function (id) {
-        if (playerExists.playerExists(id)) {
+        if (exists.playerExists(id)) {
             var cpt = find.trouveJoueur(id);
             if (data.data.joueurs[cpt].dateARecuSalaire - daySince1970.daySince1970() < 0) {
                 var paye = nombreAleatoire(data.data.metiers[find.trouveMetier(data.data.joueurs[cpt].metier)].salaireMin, data.data.metiers[find.trouveMetier(data.data.joueurs[cpt].metier)].salaireMax);
