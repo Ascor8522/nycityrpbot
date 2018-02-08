@@ -66,7 +66,7 @@ module.exports= {
 
 function retirer(place) {
     console.log("\t   [BOUTIQUE] Objet "+data.data.magasin[place].nom+" retiré du shop car il n'y en a plus.");
-    /* TODO suprimmer élément du magasin*/
+    data.data.magasin.splice(place, 1);
     var magasin = data.data.magasin;
 
 }
