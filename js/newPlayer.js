@@ -1,4 +1,4 @@
-const eists = require('./exists.js');
+const exists = require('./exists.js');
 const data = require('./data.js');
 const daySince1970 = require('./daySince1970.js');
 

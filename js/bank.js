@@ -45,7 +45,6 @@ module.exports = {
         if (exists.playerExists(id)) {
             var cpt = find.trouveJoueur(id);
             if (data.data.joueurs[cpt].banque!="ferme"&&data.data.joueurs[cpt].banque!="cloture") {
-                console.log(montant);
                 montant = parseInt(montant);
                 if (Number.isInteger(montant)&&montant>0) {
                     if (data.data.joueurs[cpt].portefeuille>=montant) {

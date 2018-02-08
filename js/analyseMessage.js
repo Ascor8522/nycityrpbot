@@ -21,7 +21,10 @@ module.exports = {
             switch (entree[0]) {
                 case "$help":
                 case "$bot":
-                case "$aide": if (entree.length==1) { toReturn = renvoyer([1,2,3,9,12,16,19,21],toReturn); } else { toReturn = renvoyer([0,1], toReturn); } break;
+                case "$aide": if (entree.length==1) {
+                    toReturn = renvoyer([1,2,3,9,12,16,19,21],toReturn);
+                    console.log();
+                } else { toReturn = renvoyer([0,1], toReturn); } break;
                 case "$jouer":
                 case "$joue":
                 case "$play":
@@ -129,18 +132,18 @@ module.exports = {
                 case "$clear": if (entree.length==1) {
                     toReturn = "**[ATTENTION] Cette commande est expérimentale et rique de ne pas fonctionner. A utiliser avec prudence donc.**";
                     clearChannel.clearChannel(message);
-                    console.log(daySince1970.time+" [CLEAR] "+message.author.id+" a clear le channel "+message.channel);
+                    console.log(daySince1970.time()+" [CLEAR] "+message.author.id+" a clear le channel "+message.channel);
                 } else { toReturn = renvoyer([0], toReturn); } break;
                 case "$debug":
                 case "$data": if (entree.length==1) {
                     toReturn = "**[ATTENTION] Cette commande est expérimentale et rique de ne pas fonctionner. A utiliser avec prudence donc.**\n" + JSON.stringify(data.data);
-                    console.log(daySince1970.time+" [DATA] "+message.author.id+" a demandé un affichage de toutes les données.");
+                    console.log(daySince1970.time()+" [DATA] "+message.author.id+" a demandé un affichage de toutes les données.");
                 } else { toReturn = renvoyer([0], toReturn); } break;
                 case "$all":
                 case "$commands":
                 case "$commands": if (entree.length==1) {
                     all(message);
-                    console.log(daySince1970.time+" [DATA] "+message.author.id+" a demandé un affichage de toutes les commandes.");
+                    console.log(daySince1970.time()+" [DATA] "+message.author.id+" a demandé un affichage de toutes les commandes.");
                 } else { toReturn = renvoyer([0], toReturn); } break;
                 default: toReturn = commands.commands[0];
             }
