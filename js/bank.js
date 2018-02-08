@@ -51,7 +51,7 @@ module.exports = {
                     if (data.data.joueurs[cpt].portefeuille>=montant) {
                         data.data.joueurs[cpt].portefeuille = data.data.joueurs[cpt].portefeuille - montant;
                         data.data.joueurs[cpt].banque = data.data.joueurs[cpt].banque + montant;
-                        console.log("\t [BANQUE] "+id+" a déposé "+montant+" sur son compte.");
+                        console.log("\t   [BANQUE] "+id+" a déposé "+montant+" sur son compte.");
                         toReturn = montant+"€ ont été déposés sur votre compte.";
                     } else {
                         toReturn = "Vous ne pouvez pas déposer ce montant, vous n'avez pas assez d'argent.";
@@ -73,13 +73,12 @@ module.exports = {
         if (exists.playerExists(id)) {
             var cpt = find.trouveJoueur(id);
             if (data.data.joueurs[cpt].banque!="ferme"&&data.data.joueurs[cpt].banque!="cloture") {
-                console.log(montant);
                 montant = parseInt(montant);
                 if (Number.isInteger(montant)&&montant>=0) {
                     if (data.data.joueurs[cpt].banque>=montant) {
                         data.data.joueurs[cpt].banque = data.data.joueurs[cpt].banque - montant;
                         data.data.joueurs[cpt].portefeuille = data.data.joueurs[cpt].portefeuille + montant;
-                        console.log("\t [BANQUE] "+id+" a retiré "+montant+" de son compte.");
+                        console.log("\t   [BANQUE] "+id+" a retiré "+montant+" de son compte.");
                         toReturn = "Vous avez retiré "+montant+"€ de votre compte.";
                     } else {
                         toReturn = "Vous ne pouvez pas déposer ce montant, vous n'avez pas assez d'argent.";

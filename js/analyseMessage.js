@@ -16,7 +16,7 @@ module.exports = {
         var toReturn ="";
         if (entree[0].charAt(0)=="$") {
             console.log(daySince1970.time()+" [MSG] Message reçu de " + message.author.username);
-            console.log("\t [MSG] Message : "+message.content);
+            console.log("\t   [MSG] Message : "+message.content);
             paySalary.paySalary(message.author.id); //paye le joueur
             switch (entree[0]) {
                 case "$help":
@@ -126,12 +126,22 @@ module.exports = {
                         case "rename": break;
                         default: toReturn = renvoyer([0,21], toReturn);
                     } break;
-                case "$clear": if (entree.length==1) { toReturn = "**[ATTENTION] Cette commande est expérimentale et rique de ne pas fonctionner. A utiliser avec prudence donc.**"; clearChannel.clearChannel(message); } else { toReturn = renvoyer([0], toReturn); } break;
+                case "$clear": if (entree.length==1) {
+                    toReturn = "**[ATTENTION] Cette commande est expérimentale et rique de ne pas fonctionner. A utiliser avec prudence donc.**";
+                    clearChannel.clearChannel(message);
+                    console.log(daySince1970.time+" [CLEAR] "+message.author.id+" a clear le channel "+message.channel);
+                } else { toReturn = renvoyer([0], toReturn); } break;
                 case "$debug":
-                case "$data": if (entree.length==1) { toReturn = "**[ATTENTION] Cette commande est expérimentale et rique de ne pas fonctionner. A utiliser avec prudence donc.**\n" + JSON.stringify(data.data); } else { toReturn = renvoyer([0], toReturn); } break;
+                case "$data": if (entree.length==1) {
+                    toReturn = "**[ATTENTION] Cette commande est expérimentale et rique de ne pas fonctionner. A utiliser avec prudence donc.**\n" + JSON.stringify(data.data);
+                    console.log(daySince1970.time+" [DATA] "+message.author.id+" a demandé un affichage de toutes les données.");
+                } else { toReturn = renvoyer([0], toReturn); } break;
                 case "$all":
                 case "$commands":
-                case "$commands": if (entree.length==1) { all(message); } else { toReturn = renvoyer([0], toReturn); } break;
+                case "$commands": if (entree.length==1) {
+                    all(message);
+                    console.log(daySince1970.time+" [DATA] "+message.author.id+" a demandé un affichage de toutes les commandes.");
+                } else { toReturn = renvoyer([0], toReturn); } break;
                 default: toReturn = commands.commands[0];
             }
             save.save(data.data);
