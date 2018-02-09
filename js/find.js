@@ -12,6 +12,9 @@ module.exports = {
     },
 
     trouveJoueur:function(id) {
+        if (!Number.isInteger(id)) {
+            id = client.users.get("name", id).id;
+        }
         if (exists.playerExists(id)) {
             var cpt = 0;
             while(data.data.joueurs[cpt].id!=id) {
@@ -19,7 +22,7 @@ module.exports = {
             }
             return cpt;
         } else {
-            return -1;
+            throw new Error ("Ce joueur n'existe pas");
         }
     },
 

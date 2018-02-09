@@ -75,6 +75,7 @@ module.exports = {
                     switch (entree[1]) {
                         case "help": if (entree.length==2) { toReturn = renvoyer([10,11], toReturn); } else { toReturn = renvoyer([0,9], toReturn); } break;
                         case "browse":
+                        case "list":
                         case "stock": if (entree.length==2) { toReturn = shop.stock(); } else { toReturn = renvoyer([0,9,10], toReturn); } break;
                         case "acheter":
                         case "buy":
