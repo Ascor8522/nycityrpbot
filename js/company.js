@@ -4,8 +4,8 @@ module.exports = {
     view:function() {
         var toReturn = "";
         if (data.data.entreprises.length>0) {
-            for (var obj in data.data.joueurs[pos].inventaire) {
-                toReturn = toReturn + Number.parseInt(obj) +". "+data.data.entreprises[obj].nom+" "+data.data.entreprises[obj]+"\n";
+            for (var obj in data.data.entreprises) {
+                toReturn = toReturn + Number.parseInt(obj) +". "+data.data.entreprises[obj].nom+"\tNombre de travailleurs: "+data.data.entreprises[obj].trvailleurs.length+"\n";
             }
         } else {
             toReturn = "Il n'y aucune entreprise dans cette ville."

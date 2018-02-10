@@ -10,6 +10,7 @@ const daySince1970 = require('./daySince1970.js');
 const shop = require('./shop.js');
 const inventory = require('./inventory.js');
 const pay = require('./pay.js');
+const company = require('./company.js');
 
 module.exports = {
     analyseMessage: function (message) {
@@ -125,7 +126,9 @@ module.exports = {
                 case "company":
                     switch (entree[1]) {
                         case "help": if (entree.length==2) { toReturn = renvoyer([22,23,24,25], toReturn); } else { toReturn = renvoyer([0,21], toReturn); } break;
-                        case "liste": if (entree.length==2) { /* TODO Liste entreprises */ toReturn = prochainement(); } else { toReturn = renvoyer([0,21,22], toReturn); } break;
+                        case "list":
+                        case "voir":
+                        case "liste": if (entree.length==2) { toReturn = company.view(); } else { toReturn = renvoyer([0,21,22], toReturn); } break;
                         case "postuler": if (entree.length==3) { /* TODO Postuler entreprise */ toReturn = prochainement(); } else { toReturn = renvoyer([0,21,23], toReturn); } break;
                         case "virer": if (entree.length==4) { /* TODO Virer entreprise */ toReturn = prochainement(); } else { toReturn = renvoyer([0,21,24], toReturn); } break;
                         case "employes": if (entree.length==3) { /* TODO Liste employés */ toReturn = prochainement(); } else { toReturn = renvoyer([0,21,25], toReturn); } break;
@@ -163,8 +166,13 @@ function all(message) {
     var toReturn ="";
     toReturn = renvoyer([1,2,3,4,5,6,7,8,9,10,11,12], toReturn);
     message.reply(toReturn);
-    toReturn = renvoyer([13,14,15,16,17,18,19,20,21,22,23,24,25], toReturn);
+    toReturn ="";
+    toReturn = renvoyer([13,14,15,16,17,18], toReturn);
     message.reply(toReturn);
+    toReturn ="";
+    toReturn = renvoyer ([19,20,21,22,23,24,25], toReturn);
+    message.reply(toReturn);
+    toReturn ="";
     toReturn = renvoyer([26,27,28,29,30,31,32], toReturn);
     message.reply(toReturn);
     toReturn = "";

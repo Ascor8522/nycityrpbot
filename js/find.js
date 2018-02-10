@@ -1,6 +1,5 @@
 const data = require('./data.js');
 const exists = require('./exists.js');
-
 module.exports = {
     trouveMetier:function(metier) {
 
@@ -12,9 +11,11 @@ module.exports = {
     },
 
     trouveJoueur:function(id) {
+        /*
         if (!Number.isInteger(id)) {
             id = client.users.get("name", id).id;
         }
+        */
         if (exists.playerExists(id)) {
             var cpt = 0;
             while(data.data.joueurs[cpt].id!=id) {

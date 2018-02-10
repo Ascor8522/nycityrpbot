@@ -1,6 +1,7 @@
 const DISCORD = require('discord.js');
 const BOT = new DISCORD.Client();
 
+
 const FS = require('fs');
 
 const token = require('./js/token.js');

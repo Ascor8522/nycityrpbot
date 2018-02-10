@@ -30,6 +30,6 @@ module.exports.commands = [
     /* 28 */"\t**$afficher utilisateur <pseudo joueur|id> <propriété>** \t Affiche la donnée sélectionnée de l'utilisateur demandé.",
     /* 29 */"\t**$afficher entreprises** \t Affiche la liste de toutes les entreprises.",
     /* 30 */"\t**$afficher entreprise <nom entreprise> <propriété>** \t Affiche la donnée sélectionnée de l'entreprise sélectionnée.",
-    /* 31 */"\t**$inventaire supprimer <nom objet|numéro> \t Supprime l'objet sélectionné de votre inventaire.",
+    /* 31 */"\t**$inventaire supprimer <nom objet|numéro>** \t Supprime l'objet sélectionné de votre inventaire.",
     /* 32 */"\t**$bank compte afficher** \t Affiche le montant présent sur votre compte en banque."
 ];
