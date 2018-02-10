@@ -92,5 +92,46 @@ module.exports = {
             toReturn = "Vous devez d'abbord vous inscrire avant de pouvoir déposer de l'argent sur un compte en banque.\nPlus d'infos:\n" + commands.commands[2];
         }
         return toReturn;
+    },
+
+    transfer:function(de, a, montant) {
+        var toReturn="";
+        if (exists.playerExists(de)) {
+            de = find.trouveJoueur(de);
+            if (exists.playerExists(a)) {
+                a = find.trouveJoueur(a);
+                if (de != a) {
+                    montant = Number.parseInt(montant);
+                    if (Number.isInteger(montant)) {
+                        if (data.data.joueurs[de].banque>=montant) {
+                            data.data.joueurs[de].banque = data.data.joueurs[de].banque - montant;
+                            data.data.joueurs[a].banque = data.data.joueurs[a].banque + montant;
+                            console.log("\t   [PAY] Le transfert de "+montant+"€ de "+de+" à "+a+" a été effectué.");
+                            toReturn = "Versement effectué.";
+                        } else {
+                            toReturn = "Vous n'avez pas assez d'argent pour envoyer cette somme.";
+                        }
+                    } else {
+                        toReturn = "Le montant à envoyer n'est pas valide";
+                    }
+                } else {
+                    toReturn = "Vous ne pouvez pas vous envoyer de l'argent à vous-même.";
+                }
+            } else {
+                toReturn = "Le destinataire doit être inscrit pour pouvoir recevoir l'argent.";
+            }
+        } else {
+            toReturn = "Vous devez être inscrit pour pouvoir verser de l'argent à quelqu'un.";
+        }
+        return toReturn;
+    },
+
+    see:function(id) {
+        var toReturn="";
+        if(exists.playerExists(id)) {
+            id = find.trouveJoueur(id);
+        } else {
+            toReturn = "Vous devez être inscrit pour pouvoir consulter votre compte.";
+        }
     }
 }

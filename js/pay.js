@@ -4,10 +4,11 @@ const find = require('./find.js');
 
 module.exports = {
     pay:function(de, a, montant) {
+        var toReturn="";
         if (exists.playerExists(de)) {
-            var de = find.trouveJoueur(de);
+            de = find.trouveJoueur(de);
             if (exists.playerExists(a)) {
-                var a = find.trouveJoueur(a);
+                a = find.trouveJoueur(a);
                 if (de != a) {
                     montant = Number.parseInt(montant);
                     if (Number.isInteger(montant)) {

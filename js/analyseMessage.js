@@ -8,6 +8,8 @@ const data = require('./data.js');
 const bank = require('./bank.js');
 const daySince1970 = require('./daySince1970.js');
 const shop = require('./shop.js');
+const inventory = require('./inventory.js');
+const pay = require('./pay.js');
 
 module.exports = {
     analyseMessage: function (message) {
@@ -32,7 +34,7 @@ module.exports = {
                 case "$banque":
                 case "$bank":
                     switch (entree[1]) {
-                        case "help": if (entree.length==2) { toReturn = renvoyer([4,5,6,7,8], toReturn); } else { toReturn = renvoyer([0,3], toReturn); } break;
+                        case "help": if (entree.length==2) { toReturn = renvoyer([4,5,6,7,8,32], toReturn); } else { toReturn = renvoyer([0,3], toReturn); } break;
                         case "compte":
                         case "account":
                             switch (entree[2]) {
@@ -49,7 +51,7 @@ module.exports = {
                                 case "suprimmer": if (entree.length==3) { toReturn = bank.close(message.author.id); } else { toReturn = renvoyer([0,3,5],toReturn); } break;
                                 case "consulter":
                                 case "voir": break;
-                                default: toReturn = renvoyer([0, 3, 4, 5], toReturn);
+                                default: toReturn = renvoyer([0, 3, 4, 5, 32], toReturn);
                             } break;
                         case "deposer":
                         case "depose":
@@ -66,7 +68,7 @@ module.exports = {
                         case "virement":
                         case "cheque":
                         case "payer":
-                        case "donner": break;
+                        case "donner": if (entree.length==4) { toReturn = bank.transfer(message.author.id, entree[2], entree[3]) } else { toReturn = renvoyer([0,3,8], toReturn); } break;
                         default: toReturn = renvoyer([0,3], toReturn);
                     } break;
                 case "$magasin":
@@ -99,22 +101,23 @@ module.exports = {
                     } break;
                 case "$inventaire":
                     switch (entree[1]) {
-                        case "help": if (entree.length==2) { toReturn = renvoyer([17,18], toReturn); } else { toReturn = renvoyer([0,16], toReturn); } break;
+                        case "help": if (entree.length==2) { toReturn = renvoyer([17,18,31], toReturn); } else { toReturn = renvoyer([0,16], toReturn); } break;
                         case "ouvrir":
                         case "consulter":
                         case "voir":
-                        case "open": if (entree.length==2) { /* TODO Ouvrir inventaire */ toReturn = prochainement(); } else { toReturn = renvoyer([0,16,17], toReturn); } break;
+                        case "open": if (entree.length==2) { toReturn = inventory.afficher(message.author.id); } else { toReturn = renvoyer([0,16,17], toReturn); } break;
                         case "jeter":
                         case "suprimmer":
-                        case "delete": if (entree.length==3) { } else { toReturn = renvoyer([0,16,], toReturn); } break;
+                        case "delete": if (entree.length==3) { toReturn = inventory.supprimer(message.author.id, entree[3]); } else { toReturn = renvoyer([0,16,31], toReturn); } break;
                         default: toReturn = renvoyer([0,16], toReturn);
                     } break;
                 case "$payer":
-                    if (entree.length==3) {
-                        if (entree[1]=="help") {
-                            toReturn = renvoyer([20], toReturn);
-                        } else { /* TODO Payer joueur */ toReturn = prochainement(); }
-                    } else { toReturn = renvoyer([0,19], toReturn); } break;
+                    switch (entree[1]) {
+                        case "help": if(entree.length==2) { toReturn = renvoyer([20], toReturn); } else { toReturn = renvoyer([0,19], toReturn); } break;
+                        default: if (entree.length==3) {
+                                    toReturn = pay.pay(message.author.id, entree[1], entree[2]);
+                                } else { toReturn = renvoyer([0,19], toReturn); }
+                    }
                 case "$entreprise":
                 case "$societe":
                 case "$boite":
@@ -162,7 +165,7 @@ function all(message) {
     message.reply(toReturn);
     toReturn = renvoyer([13,14,15,16,17,18,19,20,21,22,23,24,25], toReturn);
     message.reply(toReturn);
-    toReturn = renvoyer([26,27,28,29,30], toReturn);
+    toReturn = renvoyer([26,27,28,29,30,31,32], toReturn);
     message.reply(toReturn);
     toReturn = "";
 }
