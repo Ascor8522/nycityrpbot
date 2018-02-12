@@ -5,8 +5,8 @@ const daySince1970 = require('./daySince1970.js');
 module.exports = {
     newPlayer: function newPlayer(message) {
         if(!(exists.playerExists(message.author.id))) {
-            var newplayer = new Player(message);
-            data.data["joueurs"].push(newplayer);
+            var newPlayer = new Player(message);
+            data.data["joueurs"].push(newPlayer);
             console.log(daySince1970.time()+" [JOUEUR] Le compte du joueur "+message.author.id +" a bien été créé.");
             return "Inscription réussie! bienvenue dans l'aventure";
         } else {
