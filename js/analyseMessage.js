@@ -15,7 +15,7 @@ const company = require('./company.js');
 module.exports = {
     analyseMessage: function (message) {
         var entree = message.content.toLowerCase().split(" ");
-		for (var i =0;i<entree.length;i++) { entree[i] = entree[i].normalize('NFD').replace(/[\u0300-\u036f]/g, "")}
+		for (var i =0;i<entree.length;i++) { entree[i] = entree[i].normalize('NFD').replace(/[\u0300-\u036f]/g, "");}
         var toReturn ="";
         if (entree[0].charAt(0)=="$") {
             console.log(daySince1970.time()+" [MSG] Message reçu de " + message.author.username);
@@ -69,7 +69,7 @@ module.exports = {
                         case "virement":
                         case "cheque":
                         case "payer":
-                        case "donner": if (entree.length==4) { toReturn = bank.transfer(message.author.id, entree[2], entree[3]) } else { toReturn = renvoyer([0,3,8], toReturn); } break;
+                        case "donner": if (entree.length==4) { toReturn = bank.transfer(message.author.id, entree[2], entree[3]); } else { toReturn = renvoyer([0,3,8], toReturn); } break;
                         default: toReturn = renvoyer([0,3], toReturn);
                     } break;
                 case "$magasin":
@@ -118,7 +118,7 @@ module.exports = {
                         default: if (entree.length==3) {
                                     toReturn = pay.pay(message.author.id, entree[1], entree[2]);
                                 } else { toReturn = renvoyer([0,19], toReturn); }
-                    }
+                    } break;
                 case "$entreprise":
                 case "$societe":
                 case "$boite":

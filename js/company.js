@@ -11,7 +11,7 @@ module.exports = {
                 toReturn = toReturn + Number.parseInt(obj) +". "+data.data.entreprises[obj].nom+"\tNombre de travailleurs: "+data.data.entreprises[obj].trvailleurs.length+"\n";
             }
         } else {
-            toReturn = "Il n'y aucune entreprise dans cette ville."
+            toReturn = "Il n'y aucune entreprise dans cette ville.";
         }
     },
 

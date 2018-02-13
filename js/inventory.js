@@ -10,7 +10,7 @@ module.exports = {
                 toReturn = toReturn + Number.parseInt(obj) +". "+data.data.joueurs[pos].inventaire[obj].quantite+"x "+data.data.joueurs[pos].inventaire[obj].nom+"\n";
             }
         } else {
-            toReturn = "Votre inventaire est vide."
+            toReturn = "Votre inventaire est vide.";
         }
         return toReturn;
     },

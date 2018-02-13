@@ -86,7 +86,7 @@ module.exports = {
                     toReturn = "Le montant n'est pas vale. Veillez à ce que ce soit un **nombre entier positif**.";
                 }
             } else {
-                toReturn = "Action impossible, soit vous n'avez jamais ouvert de compte, soit vous l'avez cloturé.";;
+                toReturn = "Action impossible, soit vous n'avez jamais ouvert de compte, soit vous l'avez cloturé.";
             }
         } else {
             toReturn = "Vous devez d'abbord vous inscrire avant de pouvoir déposer de l'argent sur un compte en banque.\nPlus d'infos:\n" + commands.commands[2];
