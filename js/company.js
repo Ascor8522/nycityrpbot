@@ -5,10 +5,10 @@ const daySince1970 = require('./daySince1970.js');
 
 module.exports = {
     view:function() {
-        var toReturn = "";
+        var toReturn = "\n";
         if (data.data.entreprises.length>0) {
             for (var obj in data.data.entreprises) {
-                toReturn = toReturn + Number.parseInt(obj) +". "+data.data.entreprises[obj].nom+"\tNombre de travailleurs: "+data.data.entreprises[obj].trvailleurs.length+"\n";
+                toReturn = toReturn + (Number.parseInt(obj)+1) +". "+data.data.entreprises[obj].nom+"\tNombre de travailleurs: "+data.data.entreprises[obj].trvailleurs.length+"\n";
             }
         } else {
             toReturn = "Il n'y aucune entreprise dans cette ville.";

@@ -1,9 +1,10 @@
 const data = require('./data.js');
 const exists = require('./exists.js');
+const jobs = require('./jobs.js');
 module.exports = {
     trouveMetier:function(metier) {
         var cpt = 0;
-        while(data.data.metiers[cpt].fonction!=metier) {
+        while(jobs.metiers[cpt].fonction!=metier) {
             cpt++;
         }
         return cpt;

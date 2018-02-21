@@ -123,7 +123,7 @@ module.exports = {
                 case "$societe":
                 case "$boite":
                 case "$firme":
-                case "company":
+                case "$company":
                     switch (entree[1]) {
                         case "help": if (entree.length==2) { toReturn = renvoyer([22,23,24,25], toReturn); } else { toReturn = renvoyer([0,21], toReturn); } break;
                         case "list":

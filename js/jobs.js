@@ -1,4 +1,4 @@
-module.exports.metiers = {
+module.exports = {
     "metiers":[
         {"fonction":"patron","salaireMin":2450,"salaireMax":2450},
         {"fonction":"employe","salaireMin":1050,"salaireMax":1450},
