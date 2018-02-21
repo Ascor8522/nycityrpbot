@@ -132,6 +132,7 @@ module.exports = {
                         case "postuler": if (entree.length==3) { /* TODO Postuler entreprise */ toReturn = prochainement(); } else { toReturn = renvoyer([0,21,23], toReturn); } break;
                         case "virer": if (entree.length==4) { /* TODO Virer entreprise */ toReturn = prochainement(); } else { toReturn = renvoyer([0,21,24], toReturn); } break;
                         case "employes": if (entree.length==3) { /* TODO Liste employés */ toReturn = prochainement(); } else { toReturn = renvoyer([0,21,25], toReturn); } break;
+                        case "creer": break;
                         case "renomer":
                         case "rename": break;
                         default: toReturn = renvoyer([0,21], toReturn);

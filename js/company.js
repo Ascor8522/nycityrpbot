@@ -13,6 +13,7 @@ module.exports = {
         } else {
             toReturn = "Il n'y aucune entreprise dans cette ville.";
         }
+        return toReturn;
     },
 
     new:function(id, nom) {
@@ -42,7 +43,8 @@ module.exports = {
     },
 
     postuler:function(){
-
+        var toReturn ="";
+        return toReturn;
     },
 
     employes:function(societe) {
@@ -51,7 +53,7 @@ module.exports = {
         for (var employes in data.data.entreprises[cpt]) {
             toReturn = toReturn + Number.parseInt(employes) +". "+data.data.entreprises[cpt].trvailleurs[employes]+"\n";
         }
-
+        return toReturn;
     }
 }
 

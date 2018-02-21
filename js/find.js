@@ -2,7 +2,6 @@ const data = require('./data.js');
 const exists = require('./exists.js');
 module.exports = {
     trouveMetier:function(metier) {
-
         var cpt = 0;
         while(data.data.metiers[cpt].fonction!=metier) {
             cpt++;
@@ -16,15 +15,11 @@ module.exports = {
             id = client.users.get("name", id).id;
         }
         */
-        if (exists.playerExists(id)) {
-            var cpt = 0;
-            while(data.data.joueurs[cpt].id!=id) {
-                cpt++;
-            }
-            return cpt;
-        } else {
-            throw new Error ("Ce joueur n'existe pas");
+        var cpt = 0;
+        while(data.data.joueurs[cpt].id!=id) {
+            cpt++;
         }
+        return cpt;
     },
 
     trouveObjet:function(obj) {
