@@ -7,7 +7,7 @@ module.exports = {
         var pos = find.trouveJoueur(id);
         if (data.data.joueurs[pos].inventaire.length>0) {
             for (var obj in data.data.joueurs[pos].inventaire) {
-                toReturn = toReturn + Number.parseInt(obj) +". "+data.data.joueurs[pos].inventaire[obj].quantite+"x "+data.data.joueurs[pos].inventaire[obj].nom+"\n";
+                toReturn = toReturn + (Number.parseInt(obj)+1) +". "+data.data.joueurs[pos].inventaire[obj].quantite+"x "+data.data.joueurs[pos].inventaire[obj].nom+"\n";
             }
         } else {
             toReturn = "Votre inventaire est vide.";

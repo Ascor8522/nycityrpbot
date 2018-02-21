@@ -17,14 +17,26 @@ module.exports = {
         var toReturn;
         if (exists.playerExists(id)) {
             var player = find.trouveJoueur(id);
-            data.data.joueurs[player].metier = "chomage";
+                if (data.data.joueurs[player].metier!="chomage") {
+                    var determinant;
+                    if (['a','e','i','o','u'].includes(data.data.joueurs[player].metier.charAt(0))) { determinant = "'"; } else { determinant = 'e'; }
+                    toReturn = "Vous avez quitté votre travail d"+determinant+data.data.joueurs[player].metier;
+                    console.log("\t   "+id+" a quitté son trvail d"+determinant+data.data.joueurs[player].metier);
+                    data.data.joueurs[player].metier = "chomage";
+                } else {
+                    toReturn = "Vous êtes au chomage, et vous ne pouvez pas le quitter, à part en trouvant un travail.";
+                }
         } else {
             toReturn = "Vous devez être inscrit pour avoir un travail.";
         }
         return toReturn;
+    },
+
+    list:function () {
+        var toReturn = "Voilà la liste des différents métiers disponibles:\n";
+        for (var job in this.metiers) {
+            toReturn = toReturn + (Number.parseInt(job)+1) + ". " + this.metiers[job].fonction + "\t\tSalaire: " + this.metiers[job].salaireMax + "\n";
+        }
+        return toReturn;
     }
 }
-
-/*
-["patron","employe", "policier", "banquier", "ambulancier", "chomage"];
-*/
