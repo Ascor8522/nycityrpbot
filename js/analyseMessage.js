@@ -11,6 +11,7 @@ const shop = require('./shop.js');
 const inventory = require('./inventory.js');
 const pay = require('./pay.js');
 const company = require('./company.js');
+const jobs = require('./jobs.js');
 
 module.exports = {
     analyseMessage: function (message) {
@@ -97,7 +98,7 @@ module.exports = {
                         case "help": if (entree.length==2) { toReturn = renvoyer([13,14,15], toReturn); } else { toReturn = renvoyer([0,12], toReturn); } break;
                         case "liste": if (entree.length==2) { /* TODO Liste metiers */ toReturn = prochainement(); } else { toReturn = renvoyer([0,12,13], toReturn); } break;
                         case "postuler": if (entree.length==3) { toReturn = prochainement(); } else { toReturn = renvoyer([0,12,13,14], toReturn); } break;
-                        case "quitter": if (entree.length==3) { /* TODO Quitter metier */ toReturn = prochainement(); } else { toReturn = renvoyer([0,12,15], toReturn); } break;
+                        case "quitter": if (entree.length==3) { toReturn = jobs.leave(message.author.id) } else { toReturn = renvoyer([0,12,15], toReturn); } break;
                         default: toReturn = renvoyer([0,12], toReturn);
                     } break;
                 case "$inv":
