@@ -100,6 +100,8 @@ module.exports = {
                         case "quitter": if (entree.length==3) { /* TODO Quitter metier */ toReturn = prochainement(); } else { toReturn = renvoyer([0,12,15], toReturn); } break;
                         default: toReturn = renvoyer([0,12], toReturn);
                     } break;
+                case "$inv":
+                case "$inventory":
                 case "$inventaire":
                     switch (entree[1]) {
                         case "help": if (entree.length==2) { toReturn = renvoyer([17,18,31], toReturn); } else { toReturn = renvoyer([0,16], toReturn); } break;
@@ -109,7 +111,7 @@ module.exports = {
                         case "open": if (entree.length==2) { toReturn = inventory.afficher(message.author.id); } else { toReturn = renvoyer([0,16,17], toReturn); } break;
                         case "jeter":
                         case "suprimmer":
-                        case "delete": if (entree.length==3) { toReturn = inventory.supprimer(message.author.id, entree[3]); } else { toReturn = renvoyer([0,16,31], toReturn); } break;
+                        case "delete": if (entree.length==3) { toReturn = inventory.supprimer(message.author.id, entree[2]); } else { toReturn = renvoyer([0,16,31], toReturn); } break;
                         default: toReturn = renvoyer([0,16], toReturn);
                     } break;
                 case "$payer":

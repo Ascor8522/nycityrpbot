@@ -19,12 +19,12 @@ module.exports = {
         var player = find.trouveJoueur(id);
         var pos = find.trouveObjet(obj);
         if (pos!=-1) {
+            console.log("\t   "+id+" n'a pas pu supprimer l'objet "+obj+" de son inventaire.");
+            toReturn = "Erreur. Veuillez réessayer ou contacter un gérant.";
+        } else {
             console.log("\t   "+id+" a suprimmé "+data.data.joueurs[player].inventaire[pos].nom+" de son inventaire.");
             toReturn = data.data.joueurs[player].inventaire[pos].nom+" a bien été supprimé de votre inventaire.";
             data.data.joueurs[player].inventaire.splice(pos, 1);
-        } else {
-            console.log("\t   "+id+" n'a pas pu supprimer l'objet "+obj+" de son inventaire.");
-            toReturn = "Erreur. Veuillez réessayer ou contacter un gérant.";
         }
         return toReturn;
     }

@@ -24,16 +24,20 @@ module.exports = {
     },
 
     trouveObjet:function(obj) {
+        var toReturn;
         if (Number.isInteger(obj)) { //nombre
-            return obj-1;
-        } else { //nom
             if (exists.objectExists(obj)) {
                 var cpt = 0;
                 while(data.data.magasin[cpt].nom!=obj) {
                     cpt++;
                 }
-                return cpt;
+                toReturn = cpt;
+            } else {
+                toReturn = -1;
             }
+        } else {
+            toReturn = -1;
         }
+        return toReturn;
     }
 }
