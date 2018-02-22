@@ -25,6 +25,8 @@ module.exports = {
             switch (entree[0]) {
                 case "$help":
                 case "$bot":
+                case "$nycbot":
+                case "$nycitybot":
                 case "$aide": if (entree.length==1) {
                     toReturn = renvoyer([1,2,3,9,12,16,19,21],toReturn);
                     console.log();
@@ -52,6 +54,7 @@ module.exports = {
                                 case "del":
                                 case "suprimmer": if (entree.length==3) { toReturn = bank.close(message.author.id); } else { toReturn = renvoyer([0,3,5],toReturn); } break;
                                 case "consulter":
+                                case "money":
                                 case "voir": break;
                                 default: toReturn = renvoyer([0, 3, 4, 5, 32], toReturn);
                             } break;
@@ -75,11 +78,17 @@ module.exports = {
                     } break;
                 case "$magasin":
                 case "$shop":
+                case "$market":
+                case "$bazar":
+                case "$marche":
+                case "$commerce":
                 case "$boutique":
                     switch (entree[1]) {
                         case "help": if (entree.length==2) { toReturn = renvoyer([10,11], toReturn); } else { toReturn = renvoyer([0,9], toReturn); } break;
                         case "browse":
                         case "list":
+                        case "liste":
+                        case "voir":
                         case "stock": if (entree.length==2) { toReturn = shop.stock(); } else { toReturn = renvoyer([0,9,10], toReturn); } break;
                         case "acheter":
                         case "buy":
@@ -96,12 +105,26 @@ module.exports = {
                 case "$job":
                     switch (entree[1]) {
                         case "help": if (entree.length==2) { toReturn = renvoyer([13,14,15], toReturn); } else { toReturn = renvoyer([0,12], toReturn); } break;
+                        case "all":
+                        case "see":
+                        case "list":
                         case "liste": if (entree.length==2) { toReturn = jobs.list() } else { toReturn = renvoyer([0,12,13], toReturn); } break;
+                        case "join":
+                        case "travailler":
+                        case "faire":
                         case "postuler": if (entree.length==3) { toReturn = prochainement(); } else { toReturn = renvoyer([0,12,13,14], toReturn); } break;
+                        case "leave":
+                        case "quit":
+                        case "abandonner":
                         case "quitter": if (entree.length==3) { toReturn = jobs.leave(message.author.id) } else { toReturn = renvoyer([0,12,15], toReturn); } break;
                         default: toReturn = renvoyer([0,12], toReturn);
                     } break;
                 case "$inv":
+                case "$poche":
+                case "$pocket":
+                case "$sac":
+                case "$bag":
+                case "$backpack":
                 case "$inventory":
                 case "$inventaire":
                     switch (entree[1]) {
@@ -134,7 +157,7 @@ module.exports = {
                         case "liste": if (entree.length==2) { toReturn = company.view(); } else { toReturn = renvoyer([0,21,22], toReturn); } break;
                         case "postuler": if (entree.length==3) { /* TODO Postuler entreprise */ toReturn = prochainement(); } else { toReturn = renvoyer([0,21,23], toReturn); } break;
                         case "virer": if (entree.length==4) { /* TODO Virer entreprise */ toReturn = prochainement(); } else { toReturn = renvoyer([0,21,24], toReturn); } break;
-                        case "employes": if (entree.length==3) { /* TODO Liste employés */ toReturn = prochainement(); } else { toReturn = renvoyer([0,21,25], toReturn); } break;
+                        case "employes": console.log(entree.splice(2,2).join(' ')); toReturn = company.employes(entree.splice(2,2).join(' ')); break;
                         case "creer": break;
                         case "renomer":
                         case "rename": break;

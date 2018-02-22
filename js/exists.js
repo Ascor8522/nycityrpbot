@@ -1,5 +1,6 @@
 const data = require('./data.js');
 const daySince1970 = require('./daySince1970.js');
+const jobs = require('./jobs.js');
 
 module.exports = {
     playerExists:function(id){
@@ -10,9 +11,18 @@ module.exports = {
                 break;
             }
         }
-        if (!existe) {
+        return existe;
+    },
+
+    jobExists:function(name) {
+        var existe = false;
+        for (var prop in jobs.metiers) {
+            if(jobs.metiers[prop].function==name) {
+                existe=true;
+                break;
+            }
         }
-    return existe;
+        return existe;
     },
 
     objectExists:function(name){
@@ -23,7 +33,16 @@ module.exports = {
                 break;
             }
         }
-        if (!existe) {
+        return existe;
+    },
+
+    companyExists:function(name) {
+        var existe = false;
+        for (var prop in data.data.entreprises) {
+            if(data.data.entreprises[prop].nom==name) {
+                existe=true;
+                break;
+            }
         }
         return existe;
     }

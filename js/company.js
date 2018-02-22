@@ -2,6 +2,7 @@ const data = require('./data.js');
 const exists = require('./exists.js');
 const find = require('./find.js');
 const daySince1970 = require('./daySince1970.js');
+const index = require('./../index.js');
 
 module.exports = {
     view:function() {
@@ -51,7 +52,7 @@ module.exports = {
         var toReturn = "";
         var cpt = find.trouveEntreprise(societe);
         for (var employes in data.data.entreprises[cpt]) {
-            toReturn = toReturn + Number.parseInt(employes) +". "+data.data.entreprises[cpt].trvailleurs[employes]+"\n";
+            toReturn = toReturn + (Number.parseInt(employes)+1) +". "+index.getUsername(data.data.entreprises[cpt].trvailleurs[employes])+"\n";
         }
         return toReturn;
     }

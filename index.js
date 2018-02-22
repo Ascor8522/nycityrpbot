@@ -35,3 +35,9 @@ BOT.on('message', message => {
         }
     }
 });
+
+module.exports = {
+    getUsername:function(id) {
+        return BOT.users.get('id', id).username;
+    }
+}
