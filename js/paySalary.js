@@ -10,14 +10,18 @@ module.exports = {
         if (exists.playerExists(id)) {
             var cpt = find.trouveJoueur(id);
             if (data.data.joueurs[cpt].dateARecuSalaire - daySince1970.daySince1970() < 0) {
-                var paye = nombreAleatoire(jobs.metiers[find.trouveMetier(data.data.joueurs[cpt].metier)].salaireMin, jobs.metiers[find.trouveMetier(data.data.joueurs[cpt].metier)].salaireMax);
+                var job = find.trouveMetier(data.data.joueurs[cpt].metier);
+                var min = jobs.metiers[job].salaireMin;
+                var max = jobs.metiers[job].salaireMax;
+                var paye = nombreAleatoire(min, max);
                 if (data.data.joueurs[cpt].banque=="ferme"||data.data.joueurs[cpt].banque=="cloture") {
                     data.data.joueurs[cpt].portefeuille = data.data.joueurs[cpt].portefeuille + paye;
+                    console.log(daySince1970.time()+" [BANQUE] Le joueur "+id+" s'est vu versé la somme de "+paye+"€ sur son portefeuille.");
                 } else {
                     data.data.joueurs[cpt].banque = data.data.joueurs[cpt].banque + paye;
+                    console.log(daySince1970.time()+" [BANQUE] Le joueur "+id+" s'est vu versé la somme de "+paye+"€ sur son compte en banque.");
                 }
                 data.data.joueurs[cpt].dateARecuSalaire = daySince1970.daySince1970();
-                console.log(daySince1970.time()+" [BANQUE] Le joueur "+id+" s'est vu versé la somme de "+paye+"€.");
             }
         }
     }

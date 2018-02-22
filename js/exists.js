@@ -17,7 +17,7 @@ module.exports = {
     jobExists:function(name) {
         var existe = false;
         for (var prop in jobs.metiers) {
-            if(jobs.metiers[prop].function==name) {
+            if(jobs.metiers[prop].fonction==name) {
                 existe=true;
                 break;
             }

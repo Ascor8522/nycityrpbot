@@ -1,28 +1,19 @@
 const data = require('./data.js');
 const exists = require('./exists.js');
 const jobs = require('./jobs.js');
-module.exports = {
 
+module.exports = {
     trouveMetier:function(metier) {
         var toReturn;
-        if (exists.jobExists(metier)) {
-            var cpt = 0;
-            while(jobs.metiers[cpt].fonction!=metier) {
-                cpt++;
-            }
-            toReturn = cpt;
-        } else {
-            toReturn = -1;
+        var cpt = 0;
+        while(jobs.metiers[cpt].fonction!=metier) {
+            cpt++;
         }
+        toReturn = cpt;
         return toReturn;
     },
 
     trouveJoueur:function(id) {
-        /*
-        if (!Number.isInteger(id)) {
-            id = client.users.get("name", id).id;
-        }
-        */
         var cpt = 0;
         while(data.data.joueurs[cpt].id!=id) {
             cpt++;
