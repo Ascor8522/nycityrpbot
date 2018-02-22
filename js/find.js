@@ -4,13 +4,11 @@ const jobs = require('./jobs.js');
 
 module.exports = {
     trouveMetier:function(metier) {
-        var toReturn;
         var cpt = 0;
         while(jobs.metiers[cpt].fonction!=metier) {
             cpt++;
         }
-        toReturn = cpt;
-        return toReturn;
+        return cpt;
     },
 
     trouveJoueur:function(id) {
@@ -40,16 +38,10 @@ module.exports = {
     },
 
     trouveEntreprise:function(nom) {
-        var toReturn;
-        if (exists.companyExists(nom)) {
-            var cpt = 0;
-            while(data.data.entreprises[cpt].nom!=nom) {
-                cpt++;
-            }
-            toReturn = cpt;
-        } else {
-            toReturn = -1;
+        var cpt = 0;
+        while(data.data.entreprises[cpt].nom!=nom) {
+            cpt++;
         }
-        return toReturn;
+        return cpt;
     }
 }

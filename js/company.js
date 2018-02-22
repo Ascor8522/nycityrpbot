@@ -50,9 +50,13 @@ module.exports = {
 
     employes:function(societe) {
         var toReturn = "";
-        var cpt = find.trouveEntreprise(societe);
-        for (var employes in data.data.entreprises[cpt]) {
-            toReturn = toReturn + (Number.parseInt(employes)+1) +". "+index.getUsername(data.data.entreprises[cpt].trvailleurs[employes])+"\n";
+        if (exists.companyExists(societe)) {
+            var cpt = find.trouveEntreprise(societe);
+            for (var employes in data.data.entreprises[cpt]) {
+                toReturn = toReturn + (Number.parseInt(employes)+1) +". "+index.getUsername(data.data.entreprises[cpt].trvailleurs[employes])+"\n";
+            }
+        } else {
+            toReturn = "Cette société n'existe pas.";
         }
         return toReturn;
     }

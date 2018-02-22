@@ -1,17 +1,17 @@
-const clearChannel = require('./clearChannel.js');
-const newPlayer = require('./newPlayer.js');
-const metiers = require('./jobs.js');
-const commands = require('./commands.js');
-const paySalary = require('./paySalary.js');
-const save = require('./save.js');
-const data = require('./data.js');
 const bank = require('./bank.js');
-const daySince1970 = require('./daySince1970.js');
-const shop = require('./shop.js');
-const inventory = require('./inventory.js');
-const pay = require('./pay.js');
+const clearChannel = require('./clearChannel.js');
+const commands = require('./commands.js');
 const company = require('./company.js');
+const data = require('./data.js');
+const daySince1970 = require('./daySince1970.js');
+const inventory = require('./inventory.js');
 const jobs = require('./jobs.js');
+const newPlayer = require('./newPlayer.js');
+const pay = require('./pay.js');
+const paySalary = require('./paySalary.js');
+const profile = require('./profile.js');
+const save = require('./save.js');
+const shop = require('./shop.js');
 
 module.exports = {
     analyseMessage: function (message) {
@@ -27,10 +27,7 @@ module.exports = {
                 case "$bot":
                 case "$nycbot":
                 case "$nycitybot":
-                case "$aide": if (entree.length==1) {
-                    toReturn = renvoyer([1,2,3,9,12,16,19,21],toReturn);
-                    console.log();
-                } else { toReturn = renvoyer([0,1], toReturn); } break;
+                case "$aide": if (entree.length==1) { toReturn = renvoyer([1,2,3,9,12,16,19,21],toReturn); } else { toReturn = renvoyer([0,1], toReturn); } break;
                 case "$jouer":
                 case "$joue":
                 case "$play":
@@ -154,31 +151,37 @@ module.exports = {
                         case "help": if (entree.length==2) { toReturn = renvoyer([22,23,24,25], toReturn); } else { toReturn = renvoyer([0,21], toReturn); } break;
                         case "list":
                         case "voir":
+                        case "view":
                         case "liste": if (entree.length==2) { toReturn = company.view(); } else { toReturn = renvoyer([0,21,22], toReturn); } break;
                         case "postuler": if (entree.length==3) { /* TODO Postuler entreprise */ toReturn = prochainement(); } else { toReturn = renvoyer([0,21,23], toReturn); } break;
                         case "virer": if (entree.length==4) { /* TODO Virer entreprise */ toReturn = prochainement(); } else { toReturn = renvoyer([0,21,24], toReturn); } break;
-                        case "employes": console.log(entree.splice(2,2).join(' ')); toReturn = company.employes(entree.splice(2,2).join(' ')); break;
+                        case "employes": var entreprise = entree.splice(2,2).join(' '); toReturn = company.employes(entreprise); break;
                         case "creer": break;
                         case "renomer":
                         case "rename": break;
                         default: toReturn = renvoyer([0,21], toReturn);
                     } break;
-                case "$clear": if (entree.length==1) {
-                    toReturn = "**[ATTENTION] Cette commande est expérimentale et rique de ne pas fonctionner. A utiliser avec prudence donc.**";
-                    clearChannel.clearChannel(message);
-                    console.log(daySince1970.time()+" [CLEAR] "+message.author.id+" a clear le channel "+message.channel);
-                } else { toReturn = renvoyer([0], toReturn); } break;
+                case "$profile":
+                case "$profil": if (entree.length==1) { toReturn = profile.profile(message.author.id); } else { toReturn = "Commande inconnue." /* TODO */} break;
+                case "$clear":
+                    if (entree.length==1) {
+                        toReturn = "**[ATTENTION] Cette commande est expérimentale et rique de ne pas fonctionner. A utiliser avec prudence donc.**";
+                        clearChannel.clearChannel(message);
+                        console.log(daySince1970.time()+" [CLEAR] "+message.author.id+" a clear le channel "+message.channel);
+                    } else { toReturn = renvoyer([0], toReturn); } break;
                 case "$debug":
-                case "$data": if (entree.length==1) {
-                    toReturn = "**[ATTENTION] Cette commande est expérimentale et rique de ne pas fonctionner. A utiliser avec prudence donc.**\n" + JSON.stringify(data.data);
-                    console.log(daySince1970.time()+" [DATA] "+message.author.id+" a demandé un affichage de toutes les données.");
-                } else { toReturn = renvoyer([0], toReturn); } break;
+                case "$data":
+                    if (entree.length==1) {
+                        toReturn = "**[ATTENTION] Cette commande est expérimentale et rique de ne pas fonctionner. A utiliser avec prudence donc.**\n" + JSON.stringify(data.data);
+                        console.log(daySince1970.time()+" [DATA] "+message.author.id+" a demandé un affichage de toutes les données.");
+                    } else { toReturn = renvoyer([0], toReturn); } break;
                 case "$all":
                 case "$commands":
-                case "$commands": if (entree.length==1) {
-                    all(message);
-                    console.log(daySince1970.time()+" [DATA] "+message.author.id+" a demandé un affichage de toutes les commandes.");
-                } else { toReturn = renvoyer([0], toReturn); } break;
+                case "$commands":
+                    if (entree.length==1) {
+                        all(message);
+                        console.log(daySince1970.time()+" [DATA] "+message.author.id+" a demandé un affichage de toutes les commandes.");
+                    } else { toReturn = renvoyer([0], toReturn); } break;
                 default: toReturn = commands.commands[0];
             }
             save.save(data.data);

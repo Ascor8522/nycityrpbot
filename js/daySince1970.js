@@ -32,5 +32,9 @@ module.exports = {
         var sec = d.getSeconds();
         if (sec<10) { sec = "0"+sec;}
         return ("["+heure+":"+min+":"+sec+"]");
+    },
+
+    dateAt:function(int) {
+        
     }
 }
