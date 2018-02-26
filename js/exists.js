@@ -3,46 +3,40 @@ const daySince1970 = require('./daySince1970.js');
 const jobs = require('./jobs.js');
 
 module.exports = {
-    playerExists:function(id){
+    playerExists:function(id) {
         var existe = false;
-        for (var prop in data.data.joueurs) {
-            if(data.data.joueurs[prop].id==id) {
-                existe=true;
-                break;
-            }
+        if(data.data.joueurs.find(function(count) { return count.id == id; })) {
+            existe = true;
         }
         return existe;
     },
 
-    jobExists:function(name) {
+    jobExists:function(fonction) {
         var existe = false;
-        for (var prop in jobs.metiers) {
-            if(jobs.metiers[prop].fonction==name) {
-                existe=true;
-                break;
-            }
+        if(jobs.metiers.find(function(count) { return count.fonction == fonction; })) {
+            existe = true;
         }
         return existe;
     },
 
-    objectExists:function(name){
-        var existe = false;
-        for (var prop in data.data.magasin) {
-            if(data.data.magasin[prop].nom==name) {
-                existe=true;
-                break;
+    objectExists:function(objet) {
+        var toReturn = false;
+        if (Number.isInteger(objet)) { //nombre
+            if(objet<=data.data.magasin.length) {
+                toReturn = true;
+            }
+        } else { //nom
+            if(data.data.magasin.find(function(count) { return count.nom == objet; })) {
+                existe = true;
             }
         }
-        return existe;
+        return toReturn;
     },
 
-    companyExists:function(name) {
+    companyExists:function(company) {
         var existe = false;
-        for (var prop in data.data.entreprises) {
-            if(data.data.entreprises[prop].nom==name) {
-                existe=true;
-                break;
-            }
+        if(data.data.company.find(function(count) { return count.nom == company; })) {
+            existe = true;
         }
         return existe;
     }

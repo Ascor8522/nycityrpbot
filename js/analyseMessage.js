@@ -113,7 +113,7 @@ module.exports = {
                         case "leave":
                         case "quit":
                         case "abandonner":
-                        case "quitter": if (entree.length==3) { toReturn = jobs.leave(message.author.id) } else { toReturn = renvoyer([0,12,15], toReturn); } break;
+                        case "quitter": if (entree.length==2) { toReturn = jobs.leave(message.author.id) } else { toReturn = renvoyer([0,12,15], toReturn); } break;
                         default: toReturn = renvoyer([0,12], toReturn);
                     } break;
                 case "$inv":
