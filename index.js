@@ -1,7 +1,6 @@
 const DISCORD = require('discord.js');
 const BOT = new DISCORD.Client();
 
-
 const FS = require('fs');
 
 const token = require('./js/token.js');
@@ -38,6 +37,6 @@ BOT.on('message', message => {
 
 module.exports = {
     getUsername:function(id) {
-        return BOT.users.get('id', id).username;
+        return BOT.users.get(id).username;
     }
 }

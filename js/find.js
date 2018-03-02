@@ -1,13 +1,13 @@
-const data = require('./data.js');
-
 module.exports = {
     trouveEntreprise:function(entreprise) {
+        const data = require('./data.js');
         return data.data.entreprises.findIndex(function(count) {
             return count.nom == entreprise;
         });
     },
     
     trouveJoueur:function(id) {
+        const data = require('./data.js');
         return data.data.joueurs.findIndex(function(count) {
             return count.id == id;
         });
@@ -21,6 +21,7 @@ module.exports = {
     },
 
     trouveObjet:function(obj) {
+        const data = require('./data.js');
         var toReturn;
         if (Number.isInteger(obj)) { //nombre
             if(obj<=data.data.magasin.length) {

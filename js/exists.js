@@ -35,7 +35,7 @@ module.exports = {
 
     companyExists:function(company) {
         var existe = false;
-        if(data.data.company.find(function(count) { return count.nom == company; })) {
+        if(data.data.entreprises.find(function(count) { return count.nom == company; })) {
             existe = true;
         }
         return existe;
