@@ -158,7 +158,7 @@ module.exports = {
                         case "employes": var entreprise = entree.splice(2,2).join(' '); toReturn = company.employes(entreprise); break;
                         case "creer": break;
                         case "renomer":
-                        case "rename": break;
+                        case "rename": if(entree.length>=3) {} else { toReturn = renvoyer([0,21,33], toReturn); } break;
                         default: toReturn = renvoyer([0,21], toReturn);
                     } break;
                 case "$profile":

@@ -31,5 +31,6 @@ module.exports.commands = [
     /* 29 */"\t**$afficher entreprises** \t Affiche la liste de toutes les entreprises.",
     /* 30 */"\t**$afficher entreprise <nom entreprise> <propriété>** \t Affiche la donnée sélectionnée de l'entreprise sélectionnée.",
     /* 31 */"\t**$inventaire supprimer <nom objet|numéro>** \t Supprime l'objet sélectionné de votre inventaire.",
-    /* 32 */"\t**$bank compte afficher** \t Affiche le montant présent sur votre compte en banque."
+    /* 32 */"\t**$bank compte afficher** \t Affiche le montant présent sur votre compte en banque.",
+    /* 33 */"\t**entreprise renommer <nouveau nom>** \t Chnage le nom de votre entreprise en échange de 500$."
 ];

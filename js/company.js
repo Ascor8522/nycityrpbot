@@ -61,6 +61,30 @@ module.exports = {
             toReturn = "Cette société n'existe pas.";
         }
         return toReturn;
+    },
+
+    rename:function(societe, id, nouveauNom) {
+        var toReturn;
+        if(exists.playerExists(id)) {
+            if (exists.companyExists(societe)) {
+                var pos = find.trouveEntreprise(societe);
+                if(data.data.entreprises[pos].patron == id) {
+                    var posplayer = find.trouveJoueur(id);
+                    if(data.data.joueurs[posplayer].banque>=500) {
+                        data.data.entreprises[pos].nom = nouveauNom;
+                        data.data.joueurs[posplayer].banque = data.data.joueurs[posplayer].banque - 500;
+                        toReturn = "Félicitations, votre entreprise s'appelle dorénavant "+nouveauNom;
+                    } else {
+                        toReturn = "Vous n'avez pas assez d'argent pour renommer votre société. Il vous faut **au minimum 500$** sur votre **compte en banque** or vous n'en avez que "+data.data.joueurs[posplayer].banque;
+                    }
+                }
+            } else {
+                toReturn = "Cette société n'existe pas ou n'a pas été trouvée.";
+            }
+        } else{
+            toReturn = "Vous devez être inscrit pour pouvoir avoir une société et la gérer.";
+        }
+        return toReturn;
     }
 }
 
