@@ -3,7 +3,7 @@ const exists = require('./exists.js');
 const find = require('./find.js');
 
 module.exports = {
-    "metiers":[
+    metiers:[
         {"fonction":"patron","salaireMin":2450,"salaireMax":2450},
         {"fonction":"employe","salaireMin":1050,"salaireMax":1450},
         {"fonction":"policier","salaireMin":1150,"salaireMax":1500},

@@ -1,5 +1,0 @@
-[01:07:31] [TOKEN] Mzk3NDkwMzQ1NTg1Mjc4OTc3.DS6Djg.XT26yW71kRhUFQ2EKooB39BG8uo
-[01:07:31] [BOT] Le bot a démarré.
-	   [BOT] Connecté en tant que Bot N-Y City Rp#4071
-	   [BOT] En train de jouer à New-York City RP
-	   [BOT] Bot prêt!
