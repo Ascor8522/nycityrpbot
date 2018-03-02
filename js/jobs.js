@@ -14,6 +14,7 @@ module.exports = {
     ],
 
     leave:function(id) {
+        const exists = require('./exists.js');
         var toReturn;
         if (exists.playerExists(id)) {
             var player = find.trouveJoueur(id);

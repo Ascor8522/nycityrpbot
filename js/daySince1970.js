@@ -35,6 +35,7 @@ module.exports = {
     },
 
     dateAt:function(int) {
-        
+        var newdate = new Date((int*24*60*60*1000)+1);
+        return newdate.getDate()+"/"+newdate.getMonth()+"/"+newdate.getFullYear();
     }
 }
