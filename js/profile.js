@@ -1,7 +1,7 @@
 const data = require('./data.js');
 const exists = require('./exists.js');
 const find = require('./find.js');
-const daysince1970 = require('./daysince1970.js');
+const daysince1970 = require('./daySince1970.js');
 const inventory = require('./inventory.js');
 
 module.exports = {
