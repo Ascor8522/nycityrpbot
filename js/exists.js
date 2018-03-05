@@ -43,5 +43,17 @@ module.exports = {
             existe = true;
         }
         return existe;
+    },
+
+    invExists:function(posPlayer,obj) {
+        var exists = false;
+        /* Si nombre, alors trouver à quoi correspond dans le shop*/
+            for (var i =0; i<data.data.joueurs[posPlayer].inventaire.length;i++) {
+                if(data.data.joueurs[posPlayer].inventaire[i].nom == obj) {
+                    exists = true;
+                    break;
+                }
+            }
+        return exists;
     }
 }

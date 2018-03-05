@@ -36,5 +36,16 @@ module.exports = {
             });
         }
         return toReturn;
+    },
+
+    trouveDansInv:function(posPlayer,obj) {
+        var toReturn;
+        for (var i =0; i<data.data.joueurs[posPlayer].inventaire.length;i++) {
+            if(data.data.joueurs[posPlayer].inventaire[i].nom == obj) {
+                toReturn = i;
+                break;
+            }
+        }
+        return toReturn;
     }
 }

@@ -32,7 +32,12 @@ module.exports= {
                                     data.data.magasin[obj_place].quantiteRestante = data.data.magasin[obj_place].quantiteRestante - qte_demandee;
                                     data.data.joueurs[player].portefeuille = data.data.joueurs[player].portefeuille - (qte_demandee*data.data.magasin[obj_place].prix);
                                     // TODO si a dans l'inv, alors ajouter à existant
-                                        data.data.joueurs[player].inventaire.push({nom:data.data.magasin[obj_place].nom, quantite:qte_demandee});
+                                        if(exists.invExists(player, obj)) {
+                                            var pos_obj_inv = find.trouveDansInv(player, obj);
+                                            data.data.joueurs[player].inventaire[pos_obj_inv].quantite = data.data.joueurs[player].inventaire[pos_obj_inv].quantite + qte_demandee;
+                                        } else {
+                                            data.data.joueurs[player].inventaire.push({nom:data.data.magasin[obj_place].nom, quantite:qte_demandee});
+                                        }
                                     toReturn = "Vous venez d'acheter "+qte_demandee+"x "+data.data.magasin[obj_place].nom;
                                     console.log("\t   [BOUTIQUE] "+player_id+" a acheté "+qte_demandee+"x "+data.data.magasin[obj_place].nom);
                                     if (data.data.magasin[obj_place].quantiteRestante==0) {
