@@ -23,11 +23,14 @@ module.exports = {
     trouveObjet:function(obj) {
         const data = require('./data.js');
         var toReturn;
-        if (Number.isInteger(obj)) { //nombre
-            if(obj<=data.data.magasin.length) {
-                toReturn = obj;
+        console.log("OBJET: "+obj);
+        if (Number.isInteger(Number.parseInt(obj))) { //nombre
+            console.log("nombre");
+            if(obj<=data.data.magasin.length&&obj>0) {
+                toReturn = obj-1;
             }
         } else { //nom
+            console.log("texte");
             toReturn = data.data.magasin.findIndex(function(count) {
                 return count.nom == obj;
             });

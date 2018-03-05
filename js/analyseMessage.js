@@ -89,7 +89,7 @@ module.exports = {
                         case "stock": if (entree.length==2) { toReturn = shop.stock(); } else { toReturn = renvoyer([0,9,10], toReturn); } break;
                         case "acheter":
                         case "buy":
-                        case "prendre": if (entree.length==4) { toReturn = shop.buy(message.author.id, entree[2], entree[3]); } else { toReturn = renvoyer([0,9,11], toReturn); } break;
+                        case "prendre": if (entree.length>=4) { toReturn = shop.buy(message.author.id, entree[2], entree.splice(3,entree.length).join(' ')); } else { toReturn = renvoyer([0,9,11], toReturn); } break;
                         case "retirer":
                         case "enlever":
                         case "delete":

@@ -17,13 +17,13 @@ module.exports= {
         return toReturn;
     },
 
-    buy:function(player_id, obj, qte_demandee) {
+    buy:function(player_id, qte_demandee, obj) {
         var toReturn;
         if (exists.playerExists(player_id)) {
             if (exists.objectExists(obj)) {
                 var obj_place = find.trouveObjet(obj);
                 var player = find.trouveJoueur(player_id);
-                if (Number.isInteger(qte_demandee)){
+                if (Number.isInteger(Number.parseInt(qte_demandee))){
                     qte_demandee = Number.parseInt(qte_demandee);
                     if(qte_demandee>0) {
                         if (10-data.data.joueurs[player].inventaire.length>0) {
@@ -31,9 +31,10 @@ module.exports= {
                                 if (data.data.joueurs[player].portefeuille >= data.data.magasin[obj_place].prix*qte_demandee) {
                                     data.data.magasin[obj_place].quantiteRestante = data.data.magasin[obj_place].quantiteRestante - qte_demandee;
                                     data.data.joueurs[player].portefeuille = data.data.joueurs[player].portefeuille - (qte_demandee*data.data.magasin[obj_place].prix);
-                                    data.data.joueurs[player].inventaire.push({nom:data.data.magasin[obj_place].nom, quantite:qte_demandee});
+                                    // TODO si a dans l'inv, alors ajouter à existant
+                                        data.data.joueurs[player].inventaire.push({nom:data.data.magasin[obj_place].nom, quantite:qte_demandee});
                                     toReturn = "Vous venez d'acheter "+qte_demandee+"x "+data.data.magasin[obj_place].nom;
-                                    console.log("\t   [BOUTIQUE] "+player_id+"a acheté "+qte_demandee+"x "+data.data.magasin[obj_place].nom);
+                                    console.log("\t   [BOUTIQUE] "+player_id+" a acheté "+qte_demandee+"x "+data.data.magasin[obj_place].nom);
                                     if (data.data.magasin[obj_place].quantiteRestante==0) {
                                         retirer(obj_place);
                                     }

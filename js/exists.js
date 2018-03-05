@@ -21,13 +21,17 @@ module.exports = {
 
     objectExists:function(objet) {
         var toReturn = false;
-        if (Number.isInteger(objet)) { //nombre
-            if(objet<=data.data.magasin.length) {
+        if (Number.isInteger(Number.parseInt(objet))) { //nombre
+            if(objet<=data.data.magasin.length&&objet>0) {
                 toReturn = true;
             }
         } else { //nom
-            if(data.data.magasin.find(function(count) { return count.nom == objet; })) {
-                existe = true;
+            existe = false;
+            for (var i=0;i<data.data.magasin.length;i++) {
+                if(data.data.magasin[i].nom==objet) {
+                    existe = true;
+                    break;
+                }
             }
         }
         return toReturn;

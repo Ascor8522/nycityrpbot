@@ -10,7 +10,7 @@ module.exports.commands = [
     /* 8  */"\t**$banque verser <pseudo joueur|id> <montant>** \t Verse un certaint montant d'argent à un joueur depuis votre compte.",
     /* 9  */"\t**$magasin help** \t Affiche l'aide concernant le magasin.",
     /* 10 */"\t**$magasin stock** \t Affiche les stocks disponibles dans le magasin ainsi que le prix des objets.",
-    /* 11 */"\t**$magasin acheter <nom ojet|numéro> <quantité>** Achête les objets dans le magasin et les met dans votre inventaire.",
+    /* 11 */"\t**$magasin acheter <quantité> <nom ojet|numéro>** Achête les objets dans le magasin et les met dans votre inventaire.",
     /* 12 */"\t**$métier help** \t Affiche l'aide concernant les métiers.",
     /* 13 */"\t**$métier liste** \t Affiche la liste de tous les métiers et salaires.",
     /* 14 */"\t**$métier postuler <nom métier>** \t Vous affecte un nouveau métier.",
