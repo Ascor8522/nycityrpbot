@@ -1,3 +1,5 @@
+const data = require('./data.js');
+const jobs = require('./jobs.js');
 module.exports = {
     trouveEntreprise:function(entreprise) {
         const data = require('./data.js');
@@ -39,11 +41,21 @@ module.exports = {
     },
 
     trouveDansInv:function(posPlayer,obj) {
+        const data = require('./data.js');
         var toReturn;
-        for (var i =0; i<data.data.joueurs[posPlayer].inventaire.length;i++) {
-            if(data.data.joueurs[posPlayer].inventaire[i].nom == obj) {
-                toReturn = i;
-                break;
+        if(Number.isInteger(Number.parseInt(obj))) {
+            for (var i =0; i<data.data.joueurs[posPlayer].inventaire.length;i++) {
+                if(data.data.joueurs[posPlayer].inventaire[i].nom == data.data.magasin[obj].nom) {
+                    exists = i;
+                    break;
+                }
+            }
+        } else {
+            for (var i =0; i<data.data.joueurs[posPlayer].inventaire.length;i++) {
+                if(data.data.joueurs[posPlayer].inventaire[i].nom == obj) {
+                    toReturn = i;
+                    break;
+                }
             }
         }
         return toReturn;

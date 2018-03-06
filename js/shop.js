@@ -9,7 +9,7 @@ module.exports= {
         var toReturn = "Voici le contenu de la boutique:\n";
         if (data.data.magasin.length>0) {
             for (var cpt in data.data.magasin) {
-                toReturn = toReturn +(Number.parseInt(cpt)+1)+". "+data.data.magasin[cpt].quantiteRestante+"x "+data.data.magasin[cpt].nom+" à "+data.data.magasin[cpt].prix+"€\n";
+                toReturn = toReturn +(Number.parseInt(cpt)+1)+". "+data.data.magasin[cpt].quantiteRestante+"x "+data.data.magasin[cpt].nom+" à "+data.data.magasin[cpt].prix+"$\n";
             }
         } else {
             toReturn = "La boutique est vide.\nElle sera prochainement réaprovisionnée.";
@@ -18,6 +18,7 @@ module.exports= {
     },
 
     buy:function(player_id, qte_demandee, obj) {
+        const data = require('./data.js');
         var toReturn;
         if (exists.playerExists(player_id)) {
             if (exists.objectExists(obj)) {

@@ -51,7 +51,7 @@ module.exports = {
                         data.data.joueurs[cpt].portefeuille = data.data.joueurs[cpt].portefeuille - montant;
                         data.data.joueurs[cpt].banque = data.data.joueurs[cpt].banque + montant;
                         console.log("\t   [BANQUE] "+id+" a déposé "+montant+" sur son compte.");
-                        toReturn = montant+"€ ont été déposés sur votre compte.";
+                        toReturn = montant+"$ ont été déposés sur votre compte.";
                     } else {
                         toReturn = "Vous ne pouvez pas déposer ce montant, vous n'avez pas assez d'argent.";
                     }

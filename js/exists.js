@@ -47,13 +47,19 @@ module.exports = {
 
     invExists:function(posPlayer,obj) {
         var exists = false;
-        /* Si nombre, alors trouver à quoi correspond dans le shop*/
+        if(Number.isInteger(Number.parseInt(obj))) {
+            var numero = Number.parseInt(obj);
+            if(obj<data.data.magasin.length&&obj>0) {
+                exists = true;
+            }
+        } else {
             for (var i =0; i<data.data.joueurs[posPlayer].inventaire.length;i++) {
                 if(data.data.joueurs[posPlayer].inventaire[i].nom == obj) {
                     exists = true;
                     break;
                 }
             }
+        }
         return exists;
     }
 }

@@ -1,0 +1,11 @@
+TODO:
+
+shop buy
+job postuler
+inv delete
+company postuler
+company virer
+company employes
+
+
+inv afficher si pas inscrit?

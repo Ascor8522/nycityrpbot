@@ -3,7 +3,7 @@ const data = require('./data.js');
 const daySince1970 = require('./daySince1970.js');
 
 module.exports = {
-    newPlayer: function newPlayer(message) {
+    newPlayer: function (message) {
         if(!(exists.playerExists(message.author.id))) {
             var newPlayer = new Player(message);
             data.data.joueurs.push(newPlayer);
