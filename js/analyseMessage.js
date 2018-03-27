@@ -4,9 +4,11 @@ const commands = require('./commands.js');
 const company = require('./company.js');
 const data = require('./data.js');
 const daySince1970 = require('./daySince1970.js');
+const exists = require('./exists.js');
 const inventory = require('./inventory.js');
 const jobs = require('./jobs.js');
 const newPlayer = require('./newPlayer.js');
+const notification = require('./notification.js');
 const pay = require('./pay.js');
 const paySalary = require('./paySalary.js');
 const profile = require('./profile.js');
@@ -52,7 +54,11 @@ module.exports = {
                                 case "suprimmer": if (entree.length==3) { toReturn = bank.close(message.author.id); } else { toReturn = renvoyer([0,3,5],toReturn); } break;
                                 case "consulter":
                                 case "money":
-                                case "voir": break;
+                                case "voir":
+                                case "afficher":
+                                case "see":
+                                    if (entree.length==3) { toReturn = bank.see(message.author.id); } else { toReturn = renvoyer([0,3,32],toReturn); }
+                                    break;
                                 default: toReturn = renvoyer([0, 3, 4, 5, 32], toReturn);
                             } break;
                         case "deposer":
@@ -163,6 +169,14 @@ module.exports = {
                     } break;
                 case "$profile":
                 case "$profil": if (entree.length==1) { toReturn = profile.profile(message.author.id); } else { toReturn = "Commande inconnue." /* TODO */} break;
+                case "$notification":
+                case "$notifications":
+                case "$notif":
+                case "$notifs":
+                case "$messages":
+                case "$message":
+                if (entree.length==1) { toReturn = notification.notification(message.author.id); } else { toReturn = "Commande inconnue." /* TODO */}
+                    break;
                 case "$clear":
                     if (entree.length==1) {
                         toReturn = "**[ATTENTION] Cette commande est expérimentale et rique de ne pas fonctionner. A utiliser avec prudence donc.**";
@@ -186,6 +200,7 @@ module.exports = {
             }
             save.save(data.data);
         }
+        toReturn = notification.notify(message.author.id);
         return toReturn;
     }
 }

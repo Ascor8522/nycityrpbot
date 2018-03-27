@@ -129,9 +129,15 @@ module.exports = {
     see:function(id) {
         var toReturn="";
         if(exists.playerExists(id)) {
-            id = find.trouveJoueur(id);
+            pos = find.trouveJoueur(id);
+            if(data.data.joueurs[pos].banque!="ferme"&&data.data.joueurs[pos].banque!="cloture") {
+                toReturn = "**Detail de votre compte en banque:**\nSolde: "+data.data.joueurs[pos].banque+"$";
+            } else {
+                toReturn = "Vous n'avez pas de compte, impossible de le consoluter donc.";
+            }
         } else {
             toReturn = "Vous devez être inscrit pour pouvoir consulter votre compte.";
         }
+        return toReturn;
     }
 }

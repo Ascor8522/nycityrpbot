@@ -18,7 +18,7 @@ console.log(daySince1970.time()+" [BOT] Le bot a démarré.");
 
 BOT.on('ready', () => {
     console.log("\t   [BOT] Connecté en tant que "+ BOT.user.tag);
-    BOT.user.setPresence({ game: { name: 'New-York City RP', type: 0, url:'https://www.twitch.tv/discordapp' } }); // jeu en cours
+    BOT.user.setPresence({ game: { name: 'New-York City RP', type: 1, url:'https://www.twitch.tv/discordapp' } }); // jeu en cours
     console.log("\t   [BOT] En train de jouer à "+ BOT.user.presence.game.name);
     console.log("\t   [BOT] Bot prêt!");
 });
